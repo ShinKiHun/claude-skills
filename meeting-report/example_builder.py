@@ -13,6 +13,8 @@ IMG = {
     "geom": b64(FIGDIR / "geom_ensemble.png"),
     "ih": b64(SCRATCH / "struct_gas_ih.png"),
     "al": b64(SCRATCH / "struct_al2o3.png"),
+    "flow": b64(SCRATCH / "fig_qcd_flow.png"),
+    "ruban": b64(SCRATCH / "fig_ruban.png"),
 }
 
 CSS = """
@@ -151,6 +153,8 @@ A4500 직렬 무사고 · SLURM: BH blind 8시스템 진행 중</div>
 <div class="kick">Zero-cost harvest</div>
 <h2><span class="num">2</span>QCD 데이터셋 회수 — 신규 계산 0으로 4건</h2>
 <div class="take">과거 벤치마킹 자산에 UMA 계산이 전량 완료되어 있었음 — join만으로 검증·물성·라이브러리 확보.</div>
+<figure><img src="{IMG['flow']}" alt="QCD harvest flow">
+<figcaption>QCD 자산 → 4개 추출물 → 검증 스택과 제시 엔진으로 흘러가는 구조. 전 과정 신규 계산 ≈ 0.</figcaption></figure>
 <table class="s">
 <tr><th>추출물</th><th>핵심 수치</th><th>용도</th></tr>
 <tr><td>isomer-ranking anchor (8원소 9,803개)</td><td>τ 0.772 · size 55 argmin 6/8 · miss 4.4 meV/atom (&lt;kT)</td><td>UMA가 skeleton 고를 자격</td></tr>
@@ -199,6 +203,9 @@ A4500 직렬 무사고 · SLURM: BH blind 8시스템 진행 중</div>
 <div class="kick">Literature cross-check</div>
 <h2><span class="num">5</span>Ruban 1999 전수 대조 — 표면 서열 4중 정합</h2>
 <div class="take">8원소 28쌍 중 26쌍 일치, 정면 불일치 0 — 반직관 Cu–Pt 케이스까지 적중.</div>
+<figure><img src="{IMG['ruban']}" alt="Ruban comparison matrix">
+<figcaption>Ruban 1999 DFT 세그리게이션 에너지 (빨강 = 표면행). 우리 서열과 부호가 어긋나는 셀은 적색 테두리 —
+단 2셀, 둘 다 |E| ≤ 0.12 eV near-degenerate (Ruban 스스로 "세그리게이션 없음" 영역).</figcaption></figure>
 <ul class="p">
 <li>Ruban PRB 24×24 DFT 표에서 우리 쌍 전수 추출 (나머지 2쌍은 Ruban 자체가 near-zero "세그리게이션 없음")</li>
 <li><b>Cu–Pt</b>: 표면에너지 순서를 거스르는 Pt-표면을 우리 모델도 예측 — <b>Calvo 2023 (EAM) 반론 방어 카드</b></li>
