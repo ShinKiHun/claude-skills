@@ -115,7 +115,7 @@ HTML = f"""<!doctype html>
 <div class="lead">잠자던 QCD 데이터셋(DFT 62,880 full-relax + UMA 152만 SP 기계산분)을 회수해
 제시 엔진에 skeleton 라이브러리를 연결. 5/5 시스템에서 icosahedron 신기록을 세우고,
 Basin Hopping 직접탐색과의 1:1 판정(NiPdPt 5 replica)에서 동급 품질·1/100 비용을 확인.
-밤에는 supported 확장 파일럿까지 4/4 성공 — Al₂O₃가 모양 선호를 뒤집는 것을 발견.</div>
+밤에는 supported 확장 파일럿까지 4/4 성공 — Al₂O₃가 모양 선호를 뒤집는 것을 발견</div>
 <div class="pills">
 <span class="pill k">Mark 5 · geom_engine 달성</span>
 <span class="pill k">multi-skeleton 5/5 신기록</span>
@@ -130,10 +130,10 @@ A4500 직렬 무사고 · SLURM: BH blind 8시스템 진행 중</div>
 <section id="s1">
 <div class="kick">Head-to-head</div>
 <h2><span class="num">1</span>BH 직접탐색 vs 제시 — NiPdPt 55 첫 완결 판정</h2>
-<div class="take">제시(~15분)가 BH replica 평균(seed당 ~25시간)과 동급. BH가 찾은 정답 모티프(icosahedron)를 우리도 제시함.</div>
+<div class="take">제시(~15분)가 BH replica 평균(seed당 ~25시간)과 동급. BH가 찾은 정답 모티프(icosahedron)를 우리도 제시함</div>
 <div class="duo">
 <figure><img src="{IMG['ih']}" alt="NiPdPt ih proposal structure">
-<figcaption>우리 제시 best 구조 (ih skeleton, −266.404 eV) — BH 상위 2개 seed가 찾은 것과 동일한 Mackay icosahedron 모티프.</figcaption></figure>
+<figcaption>우리 제시 best 구조 (ih skeleton, −266.404 eV) — BH 상위 2개 seed가 찾은 것과 동일한 Mackay icosahedron 모티프</figcaption></figure>
 <div>
 <table class="s">
 <tr><th>방법</th><th class="n">E (eV)</th><th class="n">비용</th></tr>
@@ -152,9 +152,9 @@ A4500 직렬 무사고 · SLURM: BH blind 8시스템 진행 중</div>
 <section id="s2">
 <div class="kick">Zero-cost harvest</div>
 <h2><span class="num">2</span>QCD 데이터셋 회수 — 신규 계산 0으로 4건</h2>
-<div class="take">과거 벤치마킹 자산에 UMA 계산이 전량 완료되어 있었음 — join만으로 검증·물성·라이브러리 확보.</div>
+<div class="take">과거 벤치마킹 자산에 UMA 계산이 전량 완료되어 있었음 — join만으로 검증·물성·라이브러리 확보</div>
 <figure><img src="{IMG['flow']}" alt="QCD harvest flow">
-<figcaption>QCD 자산 → 4개 추출물 → 검증 스택과 제시 엔진으로 흘러가는 구조. 전 과정 신규 계산 ≈ 0.</figcaption></figure>
+<figcaption>QCD 자산 → 4개 추출물 → 검증 스택과 제시 엔진으로 흘러가는 구조. 전 과정 신규 계산 ≈ 0</figcaption></figure>
 <table class="s">
 <tr><th>추출물</th><th>핵심 수치</th><th>용도</th></tr>
 <tr><td>isomer-ranking anchor (8원소 9,803개)</td><td>τ 0.772 · size 55 argmin 6/8 · miss 4.4 meV/atom (&lt;kT)</td><td>UMA가 skeleton 고를 자격</td></tr>
@@ -167,11 +167,11 @@ A4500 직렬 무사고 · SLURM: BH blind 8시스템 진행 중</div>
 <section id="s3">
 <div class="kick">Mark 5 · geometry axis</div>
 <h2><span class="num">3</span>Multi-skeleton 제시 — 5/5 시스템 신기록</h2>
-<div class="take">QCD skeleton + skeleton별 binary decoration 543 SP(2분) 재학습 = 임의 모양 위 ordering 제시. 전 시스템에서 fcc 제시를 경신.</div>
+<div class="take">QCD skeleton + skeleton별 binary decoration 543 SP(2분) 재학습 = 임의 모양 위 ordering 제시. 전 시스템에서 fcc 제시를 경신</div>
 <figure><img src="{IMG['geom']}" alt="geometry axis + ensemble + BH">
 <figcaption>좌: skeleton별 제시 E − fcc 제시 (5/5 ih 승, 최대 IrPdPtRh −1.84 eV) ·
 중: Boltzmann 모티프 점유 @800 K — ih 우세 83–100%, fcc/anti-Mackay 소수 공존 (ensemble 제시) ·
-우: NiPdPt BH 대비 (1/100 비용).</figcaption></figure>
+우: NiPdPt BH 대비 (1/100 비용)</figcaption></figure>
 <ul class="p">
 <li>size 38 이식 성공 (제시 vs 무작위 <b>−2.09 eV</b>) — 레시피가 size 무관</li>
 <li>binary-only 학습 원칙 유지 — "새 모양 = binary 543 SP 한 번"으로 일반화</li>
@@ -182,10 +182,10 @@ A4500 직렬 무사고 · SLURM: BH blind 8시스템 진행 중</div>
 <section id="s4">
 <div class="kick">Toward Mark 6</div>
 <h2><span class="num">4</span>Supported 확장 파일럿 — 4/4 성공 + 모양 선호 재편 발견</h2>
-<div class="take">Al₂O₃ 위에서는 gas의 ih 선호가 fcc로 뒤집힘 (+0.55 eV) — 약결합 graphene은 ih 유지. support 대조쌍 시나리오 그대로.</div>
+<div class="take">Al₂O₃ 위에서는 gas의 ih 선호가 fcc로 뒤집힘 (+0.55 eV) — 약결합 graphene은 ih 유지. support 대조쌍 시나리오 그대로</div>
 <div class="duo">
 <figure><img src="{IMG['al']}" alt="NiPdPt on Al2O3">
-<figcaption>Al₂O₃ 위 제시 best (fcc skeleton, −2413.844 eV). 계면에 Pd/Pt 농축, Ni는 계면 회피 (예비 통계).</figcaption></figure>
+<figcaption>Al₂O₃ 위 제시 best (fcc skeleton, −2413.844 eV). 계면에 Pd/Pt 농축, Ni는 계면 회피 (예비 통계)</figcaption></figure>
 <div>
 <table class="s">
 <tr><th>구성</th><th class="n">제시 min</th><th class="n">무작위 min</th><th class="n">Δ</th></tr>
@@ -195,17 +195,17 @@ A4500 직렬 무사고 · SLURM: BH blind 8시스템 진행 중</div>
 <tr><td><b>Al₂O₃ + fcc ★</b></td><td class="n"><b>−2413.844</b></td><td class="n">−2412.291</td><td class="n keep">−1.55</td></tr>
 </table>
 <div class="note o"><b>주의:</b> 계면 enrichment(Pd 1.8 / Pt 1.2 / Ni 0)는 contact 원자 5–7개 기준 —
-통계 보강 후 Piccolo/Ismail (O-affinity 재편) 방향과 정성 비교 예정.</div>
+통계 보강 후 Piccolo/Ismail (O-affinity 재편) 방향과 정성 비교 예정</div>
 </div></div>
 </section>
 
 <section id="s5">
 <div class="kick">Literature cross-check</div>
 <h2><span class="num">5</span>Ruban 1999 전수 대조 — 표면 서열 4중 정합</h2>
-<div class="take">8원소 28쌍 중 26쌍 일치, 정면 불일치 0 — 반직관 Cu–Pt 케이스까지 적중.</div>
+<div class="take">8원소 28쌍 중 26쌍 일치, 정면 불일치 0 — 반직관 Cu–Pt 케이스까지 적중</div>
 <figure><img src="{IMG['ruban']}" alt="Ruban comparison matrix">
 <figcaption>Ruban 1999 DFT 세그리게이션 에너지 (빨강 = 표면행). 우리 서열과 부호가 어긋나는 셀은 적색 테두리 —
-단 2셀, 둘 다 |E| ≤ 0.12 eV near-degenerate (Ruban 스스로 "세그리게이션 없음" 영역).</figcaption></figure>
+단 2셀, 둘 다 |E| ≤ 0.12 eV near-degenerate (Ruban 스스로 "세그리게이션 없음" 영역)</figcaption></figure>
 <ul class="p">
 <li>Ruban PRB 24×24 DFT 표에서 우리 쌍 전수 추출 (나머지 2쌍은 Ruban 자체가 near-zero "세그리게이션 없음")</li>
 <li><b>Cu–Pt</b>: 표면에너지 순서를 거스르는 Pt-표면을 우리 모델도 예측 — <b>Calvo 2023 (EAM) 반론 방어 카드</b></li>
@@ -219,7 +219,7 @@ A4500 직렬 무사고 · SLURM: BH blind 8시스템 진행 중</div>
 <div class="note c"><b>틀린 예측 1건:</b> IrPdPtRh는 구성원소에 ih 형성자가 없어 anti-Mackay 승을 예측했으나
 실제는 ih 승 (0.14 eV 차 공존). → mono 모티프 지도는 <b>후보 생성기이지 합금 오라클이 아님</b>
 (합금은 size mismatch로 ih 안정화 — 문헌 정합). 그 외: supported CE validity ρ 0.11–0.37로 약함
-(예상된 리스크, SP 재채점이 보정) · bond 회귀 분석 1건 방법 결함으로 폐기.</div>
+(예상된 리스크, SP 재채점이 보정) · bond 회귀 분석 1건 방법 결함으로 폐기</div>
 <ul class="p">
 <li><b>BH blind test 8시스템</b> (54696/54701 실행 중, 며칠) — 제시값 전부 사전 등록 완료</li>
 <li><b>Supported 후속</b>: 계면 통계 보강 + 문헌 정성 비교 → Mark 6 판단</li>

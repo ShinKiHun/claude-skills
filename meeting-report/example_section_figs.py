@@ -15,36 +15,38 @@ plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 10,
                      "figure.facecolor": SURF, "axes.facecolor": SURF, "text.color": INK})
 
 # ── ① QCD flow ──────────────────────────────────────────────
-fig, ax = plt.subplots(figsize=(11, 4.4), dpi=170)
-ax.set_xlim(0, 100); ax.set_ylim(0, 100); ax.axis("off")
+fig, ax = plt.subplots(figsize=(12.5, 5.6), dpi=170)
+ax.set_xlim(0, 100); ax.set_ylim(0, 104); ax.axis("off")
 
-def box(x, y, w, h, title, sub, fc, ec, title_c=INK, fs=10.5):
-    ax.add_patch(mp.FancyBboxPatch((x, y), w, h, boxstyle="round,pad=1.2",
-                                   fc=fc, ec=ec, lw=1.4))
-    ax.text(x + w/2, y + h - 6, title, ha="center", va="top",
+def box(x, y, w, h, title, sub, fc, ec, title_c=INK, fs=11.5):
+    ax.add_patch(mp.FancyBboxPatch((x, y), w, h, boxstyle="round,pad=1.4",
+                                   fc=fc, ec=ec, lw=1.5))
+    ax.text(x + w/2, y + h - 4, title, ha="center", va="top",
             fontsize=fs, fontweight="bold", color=title_c)
-    ax.text(x + w/2, y + h - 15, sub, ha="center", va="top", fontsize=8.2, color=INK2)
+    ax.text(x + w/2, y + h - 12, sub, ha="center", va="top", fontsize=9, color=INK2,
+            linespacing=1.5)
 
 def arrow(x1, y1, x2, y2, c=MUTED):
     ax.annotate("", xy=(x2, y2), xytext=(x1, y1),
-                arrowprops=dict(arrowstyle="-|>", color=c, lw=1.6))
+                arrowprops=dict(arrowstyle="-|>", color=c, lw=1.7))
 
-box(2, 30, 22, 42, "QCD dataset", "DFT full-relax 62,880\n(55 elements, size 3-55)\n+ UMA SP 1,520,614\n(pre-computed)", "#F2F7F7", TEAL, TEAL)
-ax.text(13, 16, "new compute ~0\n(join / fit only)", ha="center", fontsize=8.5, color=CLAY, fontweight="bold")
+box(2, 30, 23, 46, "QCD dataset", "DFT full-relax\n62,880\n(55 elem, size 3-55)\n+ UMA SP\n1,520,614", "#F2F7F7", TEAL, TEAL)
+ax.text(13.5, 22, "new compute ~ 0\n(join / fit only)", ha="center", va="top",
+        fontsize=9.5, color=CLAY, fontweight="bold")
 
-ys = [78, 56, 34, 12]
+ys = [79, 53, 27, 1]
 labels = [("isomer anchor", "UMA-DFT tau 0.772\nsize55 argmin 6/8", BLUE),
-          ("surface penalty order", "Au<Ag<Cu<Pd<Pt<Ni<Rh<Ir\n(3d<4d<5d)", BLUE),
+          ("surface penalty order", "Au<Ag<Cu<Pd<Pt<Ni<Rh<Ir\n(3d < 4d < 5d)", BLUE),
           ("motif map (55 elem)", "14 ih-formers\nAu/Pt amorph = literature", OCHRE),
           ("skeleton library", "ih / anti-Mackay /\nlow-sym candidates", OCHRE)]
-for y, (t, s, c) in zip(ys, labels):
-    box(36, y - 3, 26, 22, t, s, "#FBFBFA", c)
-    arrow(24, 51, 36, y + 8)
+for y, (t, sb, c) in zip(ys, labels):
+    box(35, y, 30, 24, t, sb, "#FBFBFA", c)
+    arrow(25.5, 53, 35, y + 12)
 
-box(74, 56, 24, 26, "validation stack", "UMA trust for skeleton pick\n+ Ruban / Kristoffersen\n4-way cross-check", "#FBF7EE", OCHRE)
-box(74, 14, 24, 26, "proposal engine Mark 5", "multi-skeleton proposal\n5/5 new records\n(+ supported pilot)", "#F2F7F7", TEAL, TEAL)
-arrow(62, 84, 74, 72); arrow(62, 62, 74, 66)
-arrow(62, 40, 74, 30); arrow(62, 18, 74, 24)
+box(76, 56, 22, 32, "validation\nstack", "UMA trust for\nskeleton pick\n+ Ruban / Kristoffersen", "#FBF7EE", OCHRE)
+box(76, 10, 22, 32, "proposal engine\nMark 5", "multi-skeleton\n5/5 new records\n(+ supported pilot)", "#F2F7F7", TEAL, TEAL)
+arrow(65, 91, 76, 78); arrow(65, 65, 76, 71)
+arrow(65, 39, 76, 32); arrow(65, 13, 76, 24)
 fig.savefig("/tmp/claude-1051/-DATA-user-scratch-khshin-NDU/c4ac04c8-57cb-4a1e-a937-280069f1f4c6/scratchpad/fig_qcd_flow.png",
             bbox_inches="tight", facecolor=SURF)
 plt.close(fig)
