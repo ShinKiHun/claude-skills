@@ -16,15 +16,16 @@ plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 10,
 
 # ── ① QCD flow ──────────────────────────────────────────────
 fig, ax = plt.subplots(figsize=(12.5, 5.6), dpi=170)
-ax.set_xlim(0, 100); ax.set_ylim(0, 104); ax.axis("off")
+ax.set_xlim(-4, 104); ax.set_ylim(-8, 112); ax.axis("off")   # 전역 여백 — 요소가 경계에 닿아도 안 잘림
 
 def box(x, y, w, h, title, sub, fc, ec, title_c=INK, fs=11.5):
     ax.add_patch(mp.FancyBboxPatch((x, y), w, h, boxstyle="round,pad=1.4",
                                    fc=fc, ec=ec, lw=1.5))
     ax.text(x + w/2, y + h - 4, title, ha="center", va="top",
             fontsize=fs, fontweight="bold", color=title_c)
-    ax.text(x + w/2, y + h - 12, sub, ha="center", va="top", fontsize=9, color=INK2,
-            linespacing=1.5)
+    n_title = title.count("\n") + 1          # 제목 줄수만큼 부제를 자동으로 내림
+    ax.text(x + w/2, y + h - 4 - 8 * n_title, sub, ha="center", va="top",
+            fontsize=9, color=INK2, linespacing=1.5)
 
 def arrow(x1, y1, x2, y2, c=MUTED):
     ax.annotate("", xy=(x2, y2), xytext=(x1, y1),
