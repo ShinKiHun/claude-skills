@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{PROJECT}} — {{DATE}} 보고</title>
+<style>
+  :root {
+    --ink: #0b0b0b; --ink2: #52514e; --muted: #898781;
+    --line: #e1e0d9; --surface: #fcfcfb; --accent: #2a78d6;
+    --good: #006300; --bad: #d03b3b;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 20px; background: #f9f9f7; color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", "Malgun Gothic", sans-serif;
+    font-size: 15px; line-height: 1.65;
+  }
+  main { max-width: 880px; margin: 0 auto; background: var(--surface);
+         padding: 40px 48px; border: 1px solid var(--line); border-radius: 8px; }
+  header { border-bottom: 2px solid var(--ink); padding-bottom: 12px; margin-bottom: 24px; }
+  header .proj { color: var(--muted); font-size: 13px; letter-spacing: .04em; }
+  header h1 { margin: 4px 0 0; font-size: 22px; }
+  .tldr { background: #eef4fc; border-left: 4px solid var(--accent);
+          padding: 14px 18px; font-size: 17px; font-weight: 600; margin: 20px 0 28px;
+          border-radius: 0 6px 6px 0; }
+  h2 { font-size: 16px; margin: 32px 0 10px; padding-top: 18px;
+       border-top: 1px solid var(--line); }
+  h2 .num { color: var(--accent); margin-right: 6px; }
+  p, li { color: var(--ink2); }
+  strong { color: var(--ink); }
+  table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 13.5px; }
+  th { text-align: left; color: var(--muted); font-weight: 600;
+       border-bottom: 1.5px solid var(--ink); padding: 6px 10px; }
+  td { border-bottom: 1px solid var(--line); padding: 6px 10px; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .win { color: var(--good); font-weight: 600; }
+  .lose { color: var(--bad); font-weight: 600; }
+  figure { margin: 16px 0; }
+  figure img { max-width: 100%; border: 1px solid var(--line); border-radius: 4px; }
+  figcaption { color: var(--muted); font-size: 12.5px; margin-top: 6px; }
+  .next li { margin: 4px 0; }
+  .ask { background: #fdf6e8; border-left: 4px solid #eda100;
+         padding: 12px 18px; border-radius: 0 6px 6px 0; }
+  footer { margin-top: 36px; color: var(--muted); font-size: 12px;
+           border-top: 1px solid var(--line); padding-top: 10px; }
+  @media print { body { background: #fff; padding: 0; }
+                 main { border: none; padding: 0; } }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="proj">{{PROJECT}} · Daily Report</div>
+    <h1>{{DATE_HUMAN}}</h1>
+  </header>
+
+  <div class="tldr">{{한 줄 결론}}</div>
+
+  <h2><span class="num">1</span>{{핵심 결과 제목}}</h2>
+  <p>{{2-3문장 설명 — 근거 수치 포함}}</p>
+  <table>
+    <thead><tr><th>항목</th><th class="num">값</th><th>비고</th></tr></thead>
+    <tbody>
+      <tr><td>…</td><td class="num">…</td><td>…</td></tr>
+    </tbody>
+  </table>
+
+  <figure>
+    <img src="data:image/png;base64,..." alt="...">
+    <figcaption>{{그림 설명}}</figcaption>
+  </figure>
+
+  <h2><span class="num">2</span>이슈 / 실패</h2>
+  <p>{{정직하게 — 원인 진단 포함}}</p>
+
+  <h2><span class="num">3</span>다음 단계</h2>
+  <ul class="next">
+    <li>…</li>
+  </ul>
+
+  <!-- total.html에만: -->
+  <h2><span class="num">4</span>미팅 논의 포인트</h2>
+  <div class="ask">{{교수님 결정이 필요한 항목}}</div>
+
+  <footer>Generated {{TIMESTAMP}} · meeting-report skill</footer>
+</main>
+</body>
+</html>
