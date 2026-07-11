@@ -1,0 +1,4 @@
+interface:
+  display_name: "Meeting Report"
+  short_description: "Build polished daily and weekly research reports"
+  default_prompt: "Use $meeting-report to create a polished research meeting report from the available project evidence."
