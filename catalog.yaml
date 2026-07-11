@@ -1,0 +1,33 @@
+repository:
+  name: "claude-skills"
+  owner: "ShinKiHun"
+  purpose: "Shared Claude Code and Codex research workflows"
+
+skills:
+  - name: "expand-task-brief"
+    path: "skills/expand-task-brief"
+    status: "active"
+    purpose: "Expand short or underspecified complex requests into execution-ready briefs and carry out the work."
+    triggers:
+      - "The user gives a short request for a complex artifact or workflow."
+      - "The user asks for a stronger, structured, or reusable prompt."
+      - "Requirements must be inferred while protecting scientific integrity."
+
+  - name: "meeting-report"
+    path: "skills/meeting-report"
+    status: "active"
+    purpose: "Create polished daily and weekly research meeting reports as self-contained HTML."
+    triggers:
+      - "자료 제작"
+      - "총자료 제작"
+      - "daily research report"
+      - "weekly meeting report"
+
+external_projects:
+  - name: "computational-paper-review-deck"
+    url: "https://github.com/ShinKiHun/computational-paper-review-deck"
+    use_for: "A standalone computational-science journal-club deck project."
+
+  - name: "claude-codex-battery-windows"
+    url: "https://github.com/ShinKiHun/claude-codex-battery-windows"
+    use_for: "A standalone Windows usage monitor application."

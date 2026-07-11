@@ -1,0 +1,4 @@
+interface:
+  display_name: "Expand Task Brief"
+  short_description: "Turn short requests into execution-ready briefs"
+  default_prompt: "Use $expand-task-brief to expand my rough request and carry the work through verification."
