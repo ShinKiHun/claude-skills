@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1050" viewBox="0 0 1200 1050" role="img" aria-labelledby="title desc">
+  <title id="title">Research presentation color palette atlas</title>
+  <desc id="desc">Thirteen paired palettes for research presentations, visualizations, and web artifacts.</desc>
+  <rect width="1200" height="1050" fill="#F8F7F4"/>
+  <text x="60" y="62" fill="#171717" font-family="Arial, sans-serif" font-size="32" font-weight="700">Research presentation color palettes</text>
+  <text x="60" y="94" fill="#4A5568" font-family="Arial, sans-serif" font-size="16">01-09 user selections · 10-13 curated additions</text>
+
+  <text x="60" y="142" fill="#4A5568" font-family="Arial, sans-serif" font-size="14" font-weight="700">USER SELECTIONS</text>
+
+  <g font-family="Arial, sans-serif" font-size="16" font-weight="700">
+    <text x="60" y="184" fill="#171717">01</text><rect x="110" y="154" width="310" height="48" rx="4" fill="#FD1843"/><text x="130" y="184" fill="#FFF9FA">#FD1843</text><rect x="425" y="154" width="310" height="48" rx="4" fill="#FFF9FA" stroke="#D8D3D3"/><text x="445" y="184" fill="#171717">#FFF9FA</text><text x="765" y="184" fill="#171717">Signal Red</text>
+    <text x="60" y="242" fill="#171717">02</text><rect x="110" y="212" width="310" height="48" rx="4" fill="#21F1A8"/><text x="130" y="242" fill="#171717">#21F1A8</text><rect x="425" y="212" width="310" height="48" rx="4" fill="#171717"/><text x="445" y="242" fill="#21F1A8">#171717</text><text x="765" y="242" fill="#171717">Neon Mint Terminal</text>
+    <text x="60" y="300" fill="#171717">03</text><rect x="110" y="270" width="310" height="48" rx="4" fill="#F5EFE0"/><text x="130" y="300" fill="#1A1A1A">#F5EFE0</text><rect x="425" y="270" width="310" height="48" rx="4" fill="#1A1A1A"/><text x="445" y="300" fill="#F5EFE0">#1A1A1A</text><text x="765" y="300" fill="#171717">Warm Paper Ink</text>
+    <text x="60" y="358" fill="#171717">04</text><rect x="110" y="328" width="310" height="48" rx="4" fill="#3C1A47"/><text x="130" y="358" fill="#B6FF00">#3C1A47</text><rect x="425" y="328" width="310" height="48" rx="4" fill="#B6FF00"/><text x="445" y="358" fill="#3C1A47">#B6FF00</text><text x="765" y="358" fill="#171717">Acid Violet</text>
+    <text x="60" y="416" fill="#171717">05</text><rect x="110" y="386" width="310" height="48" rx="4" fill="#E4FD97"/><text x="130" y="416" fill="#2D3E2C">#E4FD97</text><rect x="425" y="386" width="310" height="48" rx="4" fill="#2D3E2C"/><text x="445" y="416" fill="#E4FD97">#2D3E2C</text><text x="765" y="416" fill="#171717">Botanical Lime</text>
+    <text x="60" y="474" fill="#171717">06</text><rect x="110" y="444" width="310" height="48" rx="4" fill="#C9847A"/><text x="130" y="474" fill="#171717">#C9847A</text><rect x="425" y="444" width="310" height="48" rx="4" fill="#4A5568"/><text x="445" y="474" fill="#F8F7F4">#4A5568</text><text x="765" y="474" fill="#171717">Terracotta Slate</text>
+    <text x="60" y="532" fill="#171717">07</text><rect x="110" y="502" width="310" height="48" rx="4" fill="#0047FF"/><text x="130" y="532" fill="#F8F7F4">#0047FF</text><rect x="425" y="502" width="310" height="48" rx="4" fill="#F8F7F4" stroke="#D8D3D3"/><text x="445" y="532" fill="#0047FF">#F8F7F4</text><text x="765" y="532" fill="#171717">Cobalt Paper</text>
+    <text x="60" y="590" fill="#171717">08</text><rect x="110" y="560" width="310" height="48" rx="4" fill="#141414"/><text x="130" y="590" fill="#2BEE34">#141414</text><rect x="425" y="560" width="310" height="48" rx="4" fill="#2BEE34"/><text x="445" y="590" fill="#141414">#2BEE34</text><text x="765" y="590" fill="#171717">Instrument Green</text>
+    <text x="60" y="648" fill="#171717">09</text><rect x="110" y="618" width="310" height="48" rx="4" fill="#FF4103"/><text x="130" y="648" fill="#001621">#FF4103</text><rect x="425" y="618" width="310" height="48" rx="4" fill="#001621"/><text x="445" y="648" fill="#FF4103">#001621</text><text x="765" y="648" fill="#171717">Thermal Orange</text>
+  </g>
+
+  <line x1="60" x2="1140" y1="700" y2="700" stroke="#D8D3D3"/>
+  <text x="60" y="738" fill="#4A5568" font-family="Arial, sans-serif" font-size="14" font-weight="700">CURATED ADDITIONS</text>
+
+  <g font-family="Arial, sans-serif" font-size="16" font-weight="700">
+    <text x="60" y="780" fill="#171717">10</text><rect x="110" y="750" width="310" height="48" rx="4" fill="#0F766E"/><text x="130" y="780" fill="#FFF4D6">#0F766E</text><rect x="425" y="750" width="310" height="48" rx="4" fill="#FFF4D6"/><text x="445" y="780" fill="#0F766E">#FFF4D6</text><text x="765" y="780" fill="#171717">Teal Fieldnote</text>
+    <text x="60" y="838" fill="#171717">11</text><rect x="110" y="808" width="310" height="48" rx="4" fill="#1E2A44"/><text x="130" y="838" fill="#F2C14E">#1E2A44</text><rect x="425" y="808" width="310" height="48" rx="4" fill="#F2C14E"/><text x="445" y="838" fill="#1E2A44">#F2C14E</text><text x="765" y="838" fill="#171717">Academic Amber</text>
+    <text x="60" y="896" fill="#171717">12</text><rect x="110" y="866" width="310" height="48" rx="4" fill="#7A2845"/><text x="130" y="896" fill="#F6E7D8">#7A2845</text><rect x="425" y="866" width="310" height="48" rx="4" fill="#F6E7D8"/><text x="445" y="896" fill="#7A2845">#F6E7D8</text><text x="765" y="896" fill="#171717">Bordeaux Paper</text>
+    <text x="60" y="954" fill="#171717">13</text><rect x="110" y="924" width="310" height="48" rx="4" fill="#263238"/><text x="130" y="954" fill="#FFAB91">#263238</text><rect x="425" y="924" width="310" height="48" rx="4" fill="#FFAB91"/><text x="445" y="954" fill="#263238">#FFAB91</text><text x="765" y="954" fill="#171717">Graphite Coral</text>
+  </g>
+
+  <text x="60" y="1016" fill="#4A5568" font-family="Arial, sans-serif" font-size="14">Use the paired colors as direction, then add a neutral for dense body text and data labels.</text>
+</svg>

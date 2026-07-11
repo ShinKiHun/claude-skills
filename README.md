@@ -124,6 +124,7 @@ claude-skills/
 │  └─ archive/               # 중복·저품질·구버전
 ├─ resource-library/
 │  ├─ catalog.yaml           # 외부 Skill, MCP, 도구와 가이드의 색인
+│  ├─ design/                # 색상, 시각 시스템 등 재사용 가능한 디자인 레퍼런스
 │  └─ external/              # 원문을 복제하지 않은 출처·용도·검증 메모
 ├─ evals/                    # 실제 요청으로 Skill 동작을 확인하는 사례
 ├─ install.ps1
@@ -133,7 +134,7 @@ claude-skills/
 ## Prompt, Resource, Skill의 차이
 
 - `prompt-library/`는 새 프롬프트를 작성할 때 구조와 품질 기준을 참고하는 사례집이다.
-- `resource-library/`는 외부에서 만든 Skill, MCP, 도구와 설치 가이드를 링크로 관리하는 목록이다.
+- `resource-library/`는 외부 Skill·MCP·도구와 재사용 가능한 디자인 레퍼런스를 관리하는 목록이다.
 - `skills/`는 우리가 직접 관리하며 에이전트가 자동으로 발견하고 실행할 수 있는 워크플로다.
 - 프롬프트가 한두 번 좋아 보였다는 이유만으로 바로 Skill로 만들지 않는다.
 - 실제 작업에서 반복적으로 효과가 확인되면 공통 원칙을 추출해 Skill로 승격한다.

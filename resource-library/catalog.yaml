@@ -8,6 +8,13 @@ collections:
     collected_at: "2026-07-11"
     status: "reference"
 
+  - id: "research-presentation-color-palettes"
+    title: "연구 발표 색상 팔레트"
+    path: "design/color-palettes.md"
+    source_type: "user-curated"
+    collected_at: "2026-07-11"
+    status: "curated"
+
 resources:
   - id: "anthropic-frontend-design"
     collection: "fieldby-claude-design-top-5"
@@ -63,6 +70,18 @@ resources:
       - "승인된 Figma 시안을 기준으로 프론트엔드 제작"
     tags: ["figma", "design-to-code", "tokens", "layout"]
     requires_secret: "Figma personal access token"
+    tested_locally: false
+
+design_references:
+  - id: "research-presentation-color-palettes"
+    collection: "research-presentation-color-palettes"
+    kind: "design-reference"
+    path: "design/color-palettes.md"
+    use_for:
+      - "논문 리뷰, 연구 미팅, 웹과 연구 시각화의 색상 방향 선택"
+      - "텍스트 대비를 확인한 뒤 배경·본문·강조 색의 역할 분리"
+    tags: ["presentation", "research-visualization", "color", "accessibility", "visual-system"]
+    palette_count: 13
     tested_locally: false
 
 installation_policy:
