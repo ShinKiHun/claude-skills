@@ -106,6 +106,7 @@ claude-skills/
 │  ├─ expand-task-brief/
 │  └─ meeting-report/
 ├─ prompt-library/
+│  ├─ catalog.yaml           # 프롬프트 컬렉션과 파일의 기계 판독용 색인
 │  ├─ inbox/                 # 아직 검증하지 않은 수집 자료
 │  ├─ catalysis/             # 계산촉매 및 계산과학 분야 자료
 │  ├─ cross-domain/          # 다른 분야지만 구조가 유용한 자료

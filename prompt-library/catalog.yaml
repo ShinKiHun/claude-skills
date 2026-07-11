@@ -1,0 +1,44 @@
+collections:
+  - id: "smartdaddy-evaluation-prompts"
+    title: "스마트대디 GPT5.6 FABLE 평가 프롬프트"
+    path: "external/smartdaddy-evaluation-prompts"
+    source_url: "https://docs.google.com/document/d/14ewKgBHI5gn9M4r5YD4PhQXFt-7dwhCF/edit"
+    collected_at: "2026-07-11"
+    prompt_count: 6
+
+prompts:
+  - id: "smartdaddy-seoul-3d-physics"
+    collection: "smartdaddy-evaluation-prompts"
+    path: "external/smartdaddy-evaluation-prompts/01-seoul-3d-physics-simulation.md"
+    domain: "cross-domain"
+    workflow: "3d-simulation"
+
+  - id: "smartdaddy-original-3d-rpg"
+    collection: "smartdaddy-evaluation-prompts"
+    path: "external/smartdaddy-evaluation-prompts/02-original-3d-fantasy-rpg.md"
+    domain: "cross-domain"
+    workflow: "browser-game"
+
+  - id: "smartdaddy-service-reimplementation"
+    collection: "smartdaddy-evaluation-prompts"
+    path: "external/smartdaddy-evaluation-prompts/03-reference-service-reimplementation.md"
+    domain: "cross-domain"
+    workflow: "web-service"
+
+  - id: "smartdaddy-coffee-roastery-ppt"
+    collection: "smartdaddy-evaluation-prompts"
+    path: "external/smartdaddy-evaluation-prompts/04-scandinavian-coffee-roastery-ppt.md"
+    domain: "cross-domain"
+    workflow: "presentation"
+
+  - id: "smartdaddy-ai-business-mvp"
+    collection: "smartdaddy-evaluation-prompts"
+    path: "external/smartdaddy-evaluation-prompts/05-ai-business-mvp.md"
+    domain: "cross-domain"
+    workflow: "market-research-and-app"
+
+  - id: "smartdaddy-interactive-website"
+    collection: "smartdaddy-evaluation-prompts"
+    path: "external/smartdaddy-evaluation-prompts/06-original-interactive-website.md"
+    domain: "cross-domain"
+    workflow: "interactive-web"

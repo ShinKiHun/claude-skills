@@ -5,11 +5,14 @@ workflow: ""
 status: "inbox | testing | curated | skill-candidate | archived"
 frequency: "core | occasional | rare"
 source_type: "original | synthesized | external"
+source_collection: ""
 source_url: ""
 author: ""
 collected_at: "YYYY-MM-DD"
 last_tested: ""
 tested_with: []
+license_checked: false
+verbatim_prompt: false
 ---
 
 # Summary

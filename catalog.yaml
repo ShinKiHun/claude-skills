@@ -3,6 +3,10 @@ repository:
   owner: "ShinKiHun"
   purpose: "Shared Claude Code and Codex research workflows"
 
+prompt_library:
+  catalog: "prompt-library/catalog.yaml"
+  collection_count: 1
+
 skills:
   - name: "expand-task-brief"
     path: "skills/expand-task-brief"

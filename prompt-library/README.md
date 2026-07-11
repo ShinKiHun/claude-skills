@@ -38,4 +38,11 @@
 
 권리가 불분명하면 원문 전체보다 링크와 구조적 요약을 보관한다.
 
-새 파일은 [_template.md](_template.md)를 복사해서 작성한다.
+새 파일은 [_template.md](_template.md)를 복사해서 작성한다. 전체 색인은
+[catalog.yaml](catalog.yaml)에 기록한다.
+
+## 현재 외부 컬렉션
+
+- [스마트대디 평가 프롬프트 6종](external/smartdaddy-evaluation-prompts/README.md):
+  3D 시뮬레이션, 3D RPG, 웹서비스 재구현, 브랜드 PPT, 사업형 MVP,
+  인터랙티브 웹사이트
