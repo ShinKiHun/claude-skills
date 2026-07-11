@@ -1,3 +1,14 @@
+schema_version: 1
+
+selection_policy:
+  max_references: 3
+  match_fields:
+    - "workflow"
+    - "reference_for"
+    - "tags"
+  synthesis_rule: "Extract useful structure and quality criteria; do not concatenate prompts."
+  attribution_rule: "Report the IDs of prompts used as references."
+
 collections:
   - id: "smartdaddy-evaluation-prompts"
     title: "스마트대디 GPT5.6 FABLE 평가 프롬프트"
@@ -7,38 +18,76 @@ collections:
     prompt_count: 6
 
 prompts:
+  - id: "production-brief-pattern"
+    path: "cross-domain/production-brief-pattern.md"
+    domain: "cross-domain"
+    workflow: "complex-artifact-briefing"
+    status: "curated"
+    reference_for:
+      - "짧고 모호한 요청을 실행 가능한 상세 프롬프트로 확장"
+      - "웹사이트, 앱, 발표자료, 연구 시각화의 공통 제작 명세 작성"
+    tags:
+      - "production-brief"
+      - "acceptance-criteria"
+      - "validation"
+      - "deliverables"
+
   - id: "smartdaddy-seoul-3d-physics"
     collection: "smartdaddy-evaluation-prompts"
     path: "external/smartdaddy-evaluation-prompts/01-seoul-3d-physics-simulation.md"
     domain: "cross-domain"
     workflow: "3d-simulation"
+    reference_for:
+      - "대규모 3D 장면과 상호작용을 함께 명세"
+      - "카메라, UI, 물리 반응과 실행 검증이 필요한 시각화"
+    tags: ["3d", "simulation", "physics", "camera", "interactive", "visual-qa"]
 
   - id: "smartdaddy-original-3d-rpg"
     collection: "smartdaddy-evaluation-prompts"
     path: "external/smartdaddy-evaluation-prompts/02-original-3d-fantasy-rpg.md"
     domain: "cross-domain"
     workflow: "browser-game"
+    reference_for:
+      - "완결된 플레이 루프가 있는 3D 게임 프롬프트"
+      - "원작의 분위기만 참고하면서 저작권 경계를 명시"
+    tags: ["3d", "game", "play-loop", "boss", "originality", "browser"]
 
   - id: "smartdaddy-service-reimplementation"
     collection: "smartdaddy-evaluation-prompts"
     path: "external/smartdaddy-evaluation-prompts/03-reference-service-reimplementation.md"
     domain: "cross-domain"
     workflow: "web-service"
+    reference_for:
+      - "기존 서비스의 UX 원칙을 참고한 새 웹서비스 제작"
+      - "정적 목업이 아닌 입력부터 저장까지 작동하는 제품 프롬프트"
+    tags: ["web-app", "reference-analysis", "ux", "functional", "accessibility"]
 
   - id: "smartdaddy-coffee-roastery-ppt"
     collection: "smartdaddy-evaluation-prompts"
     path: "external/smartdaddy-evaluation-prompts/04-scandinavian-coffee-roastery-ppt.md"
     domain: "cross-domain"
     workflow: "presentation"
+    reference_for:
+      - "편집 가능한 고품질 PPT 제작 프롬프트"
+      - "이미지 중심 디자인과 최종 렌더 검수가 필요한 발표자료"
+    tags: ["ppt", "presentation", "brand", "visual-system", "render-qa"]
 
   - id: "smartdaddy-ai-business-mvp"
     collection: "smartdaddy-evaluation-prompts"
     path: "external/smartdaddy-evaluation-prompts/05-ai-business-mvp.md"
     domain: "cross-domain"
     workflow: "market-research-and-app"
+    reference_for:
+      - "시장 조사에서 실제 조작 가능한 MVP까지 연결"
+      - "사실, 추정, 가정과 데모 범위를 구분하는 사업 검증"
+    tags: ["market-research", "business", "mvp", "evidence", "interactive-app"]
 
   - id: "smartdaddy-interactive-website"
     collection: "smartdaddy-evaluation-prompts"
     path: "external/smartdaddy-evaluation-prompts/06-original-interactive-website.md"
     domain: "cross-domain"
     workflow: "interactive-web"
+    reference_for:
+      - "스크롤과 상호작용으로 경험을 전달하는 웹사이트"
+      - "기능 목록보다 첫인상과 감정적 목표가 중요한 웹 작업"
+    tags: ["interactive-web", "storytelling", "motion", "scroll", "creative-direction"]

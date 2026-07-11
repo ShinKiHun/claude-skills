@@ -1,11 +1,39 @@
 repository:
   name: "claude-skills"
   owner: "ShinKiHun"
-  purpose: "Shared Claude Code and Codex research workflows"
+  purpose: "Shared Claude Code and Codex research workflows and reference libraries"
 
 prompt_library:
   catalog: "prompt-library/catalog.yaml"
   collection_count: 1
+  prompt_count: 7
+  use_for:
+    - "Finding examples when the user asks to reference stored prompts."
+    - "Extracting reusable structures for a new task-specific prompt."
+
+resource_library:
+  catalog: "resource-library/catalog.yaml"
+  collection_count: 1
+  resource_count: 5
+  use_for:
+    - "Finding external Skills, MCP servers, tools, and setup guides."
+    - "Keeping third-party resources separate from locally maintained Skills."
+
+routing:
+  - intent: "find-or-reference-a-prompt"
+    read_first: "prompt-library/catalog.yaml"
+    examples:
+      - "참고할 만한 프롬프트 찾아줘"
+      - "저장해둔 프롬프트를 참고해서 작성해줘"
+  - intent: "find-an-external-skill-or-tool"
+    read_first: "resource-library/catalog.yaml"
+    examples:
+      - "쓸 만한 디자인 스킬 찾아줘"
+      - "외부 MCP나 도구 추천해줘"
+  - intent: "install-or-run-a-local-skill"
+    read_first: "catalog.yaml#skills"
+    examples:
+      - "내 GitHub에서 필요한 스킬 받아서 적용해"
 
 skills:
   - name: "expand-task-brief"

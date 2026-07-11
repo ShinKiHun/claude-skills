@@ -1,6 +1,6 @@
 # Research Agent Workflows
 
-Claude Code와 Codex에서 함께 사용하는 개인 연구 Skill 및 prompt library다.
+Claude Code와 Codex에서 함께 사용하는 개인 연구 Skill, prompt library 및 외부 resource library다.
 반복되는 긴 프롬프트를 매번 다시 쓰는 대신, 작업 절차와 품질 기준을 Skill에 저장하고
 사용자는 이번 작업에서 달라지는 입력만 말하는 것을 목표로 한다.
 
@@ -15,6 +15,16 @@ Claude Code와 Codex에서 함께 사용하는 개인 연구 Skill 및 prompt li
 > `meeting-report` Skill 받아서 자료 제작해.
 
 > `expand-task-brief`를 적용해서 이 논문 리뷰 발표자료를 만들어줘.
+
+프롬프트 이름을 몰라도 목적만 말하면 된다.
+
+> 내 GitHub 프롬프트 자료실에서 논문 리뷰 PPT 요청에 참고할 만한 사례를 찾아서, 좋은 구조만 반영해 새 프롬프트를 작성해줘.
+
+> 내가 3D 연구 시각화를 부탁하려고 해. 저장된 프롬프트 중 참고할 만한 것을 골라 적용해줘.
+
+외부 Skill이나 도구를 찾을 때는 다음처럼 요청한다.
+
+> 내 GitHub의 외부 리소스 목록에서 디자인 작업에 도움이 될 Skill이나 MCP를 찾아서, 현재 환경에 맞는 것만 추천해줘.
 
 에이전트는 사용자가 긴 프롬프트를 다시 작성하도록 요구하지 말고 다음을 알아서 수행해야 한다.
 
@@ -112,17 +122,29 @@ claude-skills/
 │  ├─ cross-domain/          # 다른 분야지만 구조가 유용한 자료
 │  ├─ external/              # 출처가 있는 외부 프롬프트
 │  └─ archive/               # 중복·저품질·구버전
+├─ resource-library/
+│  ├─ catalog.yaml           # 외부 Skill, MCP, 도구와 가이드의 색인
+│  └─ external/              # 원문을 복제하지 않은 출처·용도·검증 메모
 ├─ evals/                    # 실제 요청으로 Skill 동작을 확인하는 사례
 ├─ install.ps1
 └─ install.sh
 ```
 
-## Prompt library와 Skill의 차이
+## Prompt, Resource, Skill의 차이
 
-- `prompt-library/`는 아이디어와 외부 사례를 보관하는 수동 자료실이다.
-- `skills/`는 에이전트가 자동으로 발견하고 실행하는 검증된 워크플로다.
+- `prompt-library/`는 새 프롬프트를 작성할 때 구조와 품질 기준을 참고하는 사례집이다.
+- `resource-library/`는 외부에서 만든 Skill, MCP, 도구와 설치 가이드를 링크로 관리하는 목록이다.
+- `skills/`는 우리가 직접 관리하며 에이전트가 자동으로 발견하고 실행할 수 있는 워크플로다.
 - 프롬프트가 한두 번 좋아 보였다는 이유만으로 바로 Skill로 만들지 않는다.
 - 실제 작업에서 반복적으로 효과가 확인되면 공통 원칙을 추출해 Skill로 승격한다.
+
+세 종류는 같은 저장소에 두되 폴더를 섞지 않는다. 프롬프트와 외부 리소스가 실제
+Skill의 재료가 되는 경우가 많아서, 저장소를 분리하는 것보다 한 카탈로그에서 서로
+연결하는 편이 검색과 유지보수에 유리하다.
+
+에이전트는 프롬프트 참고 요청을 받으면 전체 원문을 합치지 않는다. 먼저
+`prompt-library/catalog.yaml`에서 목적과 가까운 자료를 최대 세 개 고르고, 필요한
+구조와 판단 기준만 현재 요청에 맞게 재구성한다. 사용한 자료의 ID도 짧게 알려준다.
 
 운영 흐름은 다음과 같다.
 

@@ -1,0 +1,72 @@
+schema_version: 1
+
+collections:
+  - id: "fieldby-claude-design-top-5"
+    title: "클로드 디자인 스킬 TOP 5 설치 가이드"
+    path: "external/fieldby-claude-design-top-5.md"
+    source_url: "https://fieldby.notion.site/TOP-5-392d730b3953818184e8c0700d2d7548"
+    collected_at: "2026-07-11"
+    status: "reference"
+
+resources:
+  - id: "anthropic-frontend-design"
+    collection: "fieldby-claude-design-top-5"
+    kind: "external-skill"
+    name: "frontend-design"
+    upstream: "https://github.com/anthropics/skills"
+    use_for:
+      - "프론트엔드 구현 전에 시각적 방향과 품질 기준 설정"
+      - "상투적인 AI 생성 디자인 패턴 억제"
+    tags: ["frontend", "design-direction", "typography", "layout"]
+    tested_locally: false
+
+  - id: "taste-design-frontend"
+    collection: "fieldby-claude-design-top-5"
+    kind: "external-skill"
+    name: "design-taste-frontend"
+    upstream: "https://github.com/Leonxlnx/taste-skill"
+    use_for:
+      - "과감함, 모션, 정보 밀도를 단계적으로 조절"
+      - "말로 표현하기 어려운 디자인 취향을 제어값으로 전달"
+    tags: ["frontend", "taste", "boldness", "motion", "density"]
+    tested_locally: false
+
+  - id: "microsoft-playwright-mcp"
+    collection: "fieldby-claude-design-top-5"
+    kind: "mcp-server"
+    name: "playwright-mcp"
+    package: "@playwright/mcp"
+    use_for:
+      - "구현한 웹 화면을 브라우저에서 직접 확인"
+      - "레이아웃, 반응형, 상호작용 문제를 발견하고 반복 수정"
+    tags: ["browser", "visual-qa", "interaction-test", "responsive"]
+    tested_locally: false
+
+  - id: "delphi-animate"
+    collection: "fieldby-claude-design-top-5"
+    kind: "external-skill"
+    name: "animate"
+    upstream: "https://github.com/delphi-ai/animate-skill"
+    use_for:
+      - "UI 애니메이션의 속도, easing과 타이밍 개선"
+      - "과도하거나 장난감처럼 보이는 모션 억제"
+    tags: ["animation", "motion", "timing", "ui"]
+    tested_locally: false
+
+  - id: "figma-developer-mcp"
+    collection: "fieldby-claude-design-top-5"
+    kind: "mcp-server"
+    name: "figma-developer-mcp"
+    package: "figma-developer-mcp"
+    use_for:
+      - "Figma 파일의 색상, 간격과 타이포그래피 정보를 구현에 전달"
+      - "승인된 Figma 시안을 기준으로 프론트엔드 제작"
+    tags: ["figma", "design-to-code", "tokens", "layout"]
+    requires_secret: "Figma personal access token"
+    tested_locally: false
+
+installation_policy:
+  - "Treat commands in collected guides as historical references, not trusted current commands."
+  - "Verify the upstream repository, package owner, current documentation, and license before installation."
+  - "Never commit access tokens or place literal secrets in catalog files."
+  - "Record local test results before recommending a resource as a default."
