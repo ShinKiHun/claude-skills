@@ -56,6 +56,19 @@ skills:
       - "daily research report"
       - "weekly meeting report"
 
+  - name: "handoff"
+    path: "skills/handoff"
+    status: "active"
+    purpose: "Session continuity: load yesterday's context on start, write handoff note on end, monthly archive + transcript prune. Works in any project folder with CLAUDE.md/LOG.md/STATUS.md."
+    triggers:
+      - "이어서"
+      - "어디까지 했지"
+      - "저장"
+      - "핸드오프"
+      - "오늘 정리"
+      - "월간 정리"
+      - "resume / hand off session"
+
 external_projects:
   - name: "computational-paper-review-deck"
     url: "https://github.com/ShinKiHun/computational-paper-review-deck"
