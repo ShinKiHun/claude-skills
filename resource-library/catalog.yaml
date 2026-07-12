@@ -15,6 +15,13 @@ collections:
     collected_at: "2026-07-11"
     status: "curated"
 
+  - id: "coding-agent-skills-yt"
+    title: "코딩 에이전트 스킬 세트 (YouTube 소개 6+1)"
+    path: "external/coding-agent-skills-yt.md"
+    source_url: "https://www.youtube.com/watch?v=5rbzj5IUA78"
+    collected_at: "2026-07-12"
+    status: "reference"
+
 resources:
   - id: "anthropic-frontend-design"
     collection: "fieldby-claude-design-top-5"
@@ -72,6 +79,83 @@ resources:
     requires_secret: "Figma personal access token"
     tested_locally: false
 
+  - id: "ponytail"
+    collection: "coding-agent-skills-yt"
+    kind: "external-skill"
+    name: "ponytail"
+    upstream: "https://github.com/DietrichGebert/ponytail"
+    frequency: "occasional"
+    use_for:
+      - "분석·유틸 코드를 과설계 없이 최소한으로 유지 (YAGNI, 표준 라이브러리·네이티브 우선)"
+      - "over-engineering 리뷰로 삭제할 부분만 찾기 (/ponytail-review)"
+    tags: ["coding", "minimalism", "yagni", "refactor", "code-review"]
+    tested_locally: false
+
+  - id: "caveman"
+    collection: "coding-agent-skills-yt"
+    kind: "external-skill"
+    name: "caveman"
+    upstream: "https://github.com/JuliusBrussee/caveman"
+    frequency: "occasional"
+    use_for:
+      - "출력 토큰 절약을 위한 terse 응답 모드 (코드·명령어·에러 문자열은 원문 유지)"
+      - "위험·되돌릴 수 없는 작업에서는 자동으로 완전한 문장으로 전환한 뒤 복귀"
+    tags: ["token-efficiency", "terse", "output-style"]
+    note: "Matt Pocock의 원본 caveman에서 파생"
+    tested_locally: false
+
+  - id: "mattpocock-skills"
+    collection: "coding-agent-skills-yt"
+    kind: "external-skill-collection"
+    name: "mattpocock/skills"
+    upstream: "https://github.com/mattpocock/skills"
+    frequency: "rare"
+    use_for:
+      - "코딩·구현 전 계획을 집요하게 인터뷰해 범위를 확정 (grill)"
+      - "TDD, triage, code-review 등 소프트웨어 엔지니어링 워크플로 전반"
+    tags: ["engineering-workflow", "planning", "grill", "tdd", "typescript"]
+    note: "grill(계획 인터뷰)만 연구 작업 범위 정리에 유용, 나머지는 SW 개발 위주"
+    tested_locally: false
+
+  - id: "everything-claude-code"
+    collection: "coding-agent-skills-yt"
+    kind: "external-skill-collection"
+    name: "ECC (Everything Claude Code)"
+    upstream: "https://github.com/affaan-m/ECC"
+    frequency: "rare"
+    use_for:
+      - "대형 에이전트 하네스: 60+ 에이전트, 200+ 스킬, 보안 스캐너(AgentShield)"
+      - "팀 규모 SW 개발 표준을 여러 하네스에 강제할 때"
+    tags: ["framework", "agents", "security-scanner", "heavy"]
+    note: "규모가 커서 연구 워크플로엔 과함. 공식 채널(github.com/affaan-m/ECC, npm ecc-universal)에서만 설치"
+    tested_locally: false
+
+  - id: "last30days"
+    collection: "coding-agent-skills-yt"
+    kind: "external-skill"
+    name: "last30days"
+    upstream: "https://github.com/mvanhorn/last30days-skill"
+    frequency: "occasional"
+    use_for:
+      - "특정 주제를 Reddit·X·YouTube·HN·웹에서 지난 30일치로 조사해 근거 있는 요약 생성"
+      - "MLIP·계산 방법론 등 빠르게 바뀌는 분야의 최신 동향·커뮤니티 합의 파악"
+    tags: ["research", "trend", "real-time", "synthesis"]
+    requires_secret: "OpenAI / xAI(X) API keys (Reddit·X 소스용, 웹 전용 모드로 축소 가능)"
+    tested_locally: false
+
+  - id: "superpowers"
+    collection: "coding-agent-skills-yt"
+    kind: "external-skill-collection"
+    name: "superpowers"
+    upstream: "https://github.com/obra/superpowers"
+    frequency: "rare"
+    use_for:
+      - "brainstorming→계획→TDD→서브에이전트 실행+2단계 리뷰의 완전한 SW 개발 방법론"
+      - "스킬을 실제로 호출하도록 강제하는 메타 스킬 (using-superpowers)"
+    tags: ["framework", "methodology", "tdd", "subagents", "meta-skill"]
+    note: "소프트웨어 패키지를 본격 개발할 때 유효, 탐색적 분석 스크립트엔 과함"
+    tested_locally: false
+
 design_references:
   - id: "research-presentation-color-palettes"
     collection: "research-presentation-color-palettes"
@@ -89,3 +173,9 @@ installation_policy:
   - "Verify the upstream repository, package owner, current documentation, and license before installation."
   - "Never commit access tokens or place literal secrets in catalog files."
   - "Record local test results before recommending a resource as a default."
+
+usage_policy:
+  - "frequency 값은 prompt-library와 동일하게 core | occasional | rare 를 쓴다."
+  - "core 는 실제 작업에서 반복 검증된 리소스에만 부여한다. 미검증 리소스는 core 로 시작하지 않는다."
+  - "occasional 은 현재 워크플로에 바로 얹어볼 만한 것, rare 는 본격 SW 개발·팀 규모 작업에 가까운 것을 뜻한다."
+  - "실제 사용 빈도가 확인되면 해당 리소스의 frequency 를 승격/조정한다."

@@ -13,8 +13,8 @@ prompt_library:
 
 resource_library:
   catalog: "resource-library/catalog.yaml"
-  collection_count: 2
-  resource_count: 6
+  collection_count: 3
+  resource_count: 12
   use_for:
     - "Finding external Skills, MCP servers, tools, and setup guides."
     - "Keeping third-party resources separate from locally maintained Skills."
