@@ -9,6 +9,7 @@ description: Session continuity ("인수인계") for daily research work in any 
 
 ## 어느 모드인지 먼저 판단
 - 사용자 의도가 **시작/재개**("이어서", "어디까지", "resume") → **RESUME**
+  - **날짜 지정**("이어서 07-11", "그저께꺼", "MM-DD에서") → RESUME 하되 최신 STATUS 대신 `project/STATUS_archive/YYYY-MM-DD.md` + 그날 LOG 엔트리를 읽는다.
 - **마무리/저장**("저장", "핸드오프", "오늘 정리") → **HANDOFF**
 - **월간**("월간 정리", "monthly") → **MONTHLY**
 - 애매하면 물어본다.
@@ -22,7 +23,8 @@ description: Session continuity ("인수인계") for daily research work in any 
 목적: 맥락 재설명 없이 "여기까지 왔고 다음은 X" 즉시 파악.
 
 1. **STATUS.md 전체**를 읽는다 (현재 상태 + 즉시 다음 수 + 도는 잡). 이게 핵심 인수인계 노트.
-2. **LOG.md의 가장 최근 엔트리 1개만** 읽는다 (전체 X — 길어서 렉·낭비). 최근 결정/결과 맥락.
+   - 날짜 지정 재개면 대신 `project/STATUS_archive/<그날>.md`를 읽는다 (없으면 가장 가까운 이전 날짜 + 그 이유 알림).
+2. **LOG.md의 가장 최근 엔트리 1개만** 읽는다 (전체 X — 길어서 렉·낭비). 최근 결정/결과 맥락. (날짜 지정이면 그날 엔트리.)
 3. `MARKS.md` 있으면 훑어 현재 능력 단계 확인.
 4. 도는 잡 확인: `squeue -u <user>` (또는 프로젝트의 job 시스템). STATUS의 "진행 중"과 대조.
 5. **요약 보고**: `지금 어디 (한 줄) / 도는 잡·대기 결과 / 즉시 다음 수 1~3개`. 그 후 "이거 진행할까, 아니면 다른 거?" 묻거나 다음 수 착수.
@@ -40,10 +42,11 @@ description: Session continuity ("인수인계") for daily research work in any 
    - 오늘 한 것: 결정 / 결과(수치·Job ID) / **막다른 길·실패도 기록**(반복 방지)
 2. **STATUS.md 덮어쓰기** (1페이지 유지, [references/templates.md](references/templates.md) 형식):
    - 지금 어디 (한 줄) / 진행 중 잡(표) / **즉시 다음 수(우선순위)** / 열린 질문·막다른 길 / 최근 산출물 경로
+   - **덮어쓰기 전에 기존 STATUS.md를 `project/STATUS_archive/<기존날짜>.md`로 보존** (없으면 `mkdir -p STATUS_archive`), 그리고 **새 STATUS.md도 `STATUS_archive/YYYY-MM-DD.md`로 복사**. → 과거 특정일 상태로 분기 재개 가능. `cp`는 렉 안전.
 3. **새 능력 milestone 도달**했으면 `MARKS.md` 갱신 (아니면 건드리지 말 것 — 실패·반복은 Mark 안 올림).
-4. 마무리 한마디: "내일 '이어서'라고 하면 여기서 재개됨."
+4. 마무리 한마디: "내일 '이어서'라고 하면 여기서 재개됨. ('이어서 MM-DD'로 과거 특정일 분기 가능.)"
 
-원칙: STATUS는 **덮어쓰기**(항상 현재만), LOG는 **append**(역사 보존), MARKS는 **능력 도달 시만**.
+원칙: STATUS는 **덮어쓰기**(항상 현재만) + **STATUS_archive에 날짜별 스냅샷**(과거 분기용), LOG는 **append**(역사 보존), MARKS는 **능력 도달 시만**.
 
 ---
 
