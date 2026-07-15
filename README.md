@@ -71,6 +71,10 @@ Claude Code와 Codex에서 함께 사용하는 개인 연구 Skill, prompt libra
 않기 위해서다. 기존 `~/.claude/CLAUDE.md`가 실제 파일이면 `.bak.<timestamp>`으로 백업한 뒤
 링크한다. 다른 경로를 쓰려면 `CLAUDE_GLOBAL_RULES` 환경 변수로 덮어쓴다.
 
+Windows에서 파일 symlink는 관리자 권한이나 개발자 모드가 필요하다. 권한이 없으면 설치기가
+경고를 내고 **복사로 대체**하므로, 전역 규칙은 `git pull` 후 `-GlobalRules`를 다시 실행해야
+갱신된다(Skill 폴더는 junction이라 자동 반영된다). 같은 내용이면 `.bak`을 다시 만들지 않는다.
+
 담긴 규칙은 세 가지다.
 
 - 답변은 항상 caveman 스타일 (`/caveman`을 치지 않아도 켜져 있음)
