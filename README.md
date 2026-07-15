@@ -47,10 +47,19 @@ Claude Code와 Codex에서 함께 사용하는 개인 연구 Skill, prompt libra
 | [meeting-report](skills/meeting-report/) | active | 연구 진행 상황을 일일 또는 주간 미팅 자료로 만들 때 | “자료 제작”, “총자료 제작” |
 | [caveman](skills/caveman/) | active | 응답이 길어져 토큰이 아까울 때. 전역 규칙을 설치하면 상시 적용된다 | “간결하게”, “짧게”, “토큰 줄여”, “결론만” |
 | [grilling](skills/grilling/) | active | 새 계산 셀·장시간 계산·해석을 바꾸는 방법론을 정하기 전 | “갈궈봐”, “계획 물어봐”, “하나씩 물어봐”, “합의부터 하자” |
+| [handoff](skills/handoff/) | active | 세션을 이어받거나 마무리하며 컨텍스트를 넘길 때 | “이어서”, “어디까지 했지”, “핸드오프”, “오늘 정리” |
+| [apple-design](skills/apple-design/) | active | 제스처 UI·스프링/관성 모션·시트/드래그, 반투명 재질·타이포를 만들거나 검토할 때 | “애플처럼 만들어줘”, “스프링 애니메이션” |
+| [emil-design-eng](skills/emil-design-eng/) | active | UI 폴리시·컴포넌트 설계·애니메이션 판단 등 디테일을 정할 때 | “디테일 살려줘”, “컴포넌트 다듬어줘” |
+| [review-animations](skills/review-animations/) | active | 애니메이션·모션 코드를 엄격한 기준으로 리뷰할 때 (명시 호출 전용) | “애니메이션 리뷰해줘”, `/review-animations` |
+| [improve-animations](skills/improve-animations/) | active | 코드베이스 전체 모션을 감사해 우선순위 개선 계획이 필요할 때 (소스는 수정 안 함) | “애니메이션 개선해줘”, “앱 느낌 좋게” |
+| [animation-vocabulary](skills/animation-vocabulary/) | active | 모션 효과의 정확한 명칭을 찾아 프롬프트에 쓰고 싶을 때 | “이거 뭐라고 불러?”, “이 효과 이름이 뭐야” |
 
 기계가 읽을 수 있는 전체 목록과 경로는 [catalog.yaml](catalog.yaml)에 있다.
 
-`caveman`과 `grilling`은 외부 MIT Skill을 이 저장소 기준으로 고쳐 쓰는 fork다. 출처와
+`caveman`과 `grilling`은 외부 MIT Skill을 이 저장소 기준으로 고쳐 쓰는 fork다.
+`apple-design`·`emil-design-eng`·`review-animations`·`improve-animations`·`animation-vocabulary`는
+[emilkowalski/skills](https://github.com/emilkowalski/skills) (MIT, © 2026 Emil Kowalski)를
+**수정 없이 그대로 벤더링**한 것이다. 출처와
 원문 라이선스는 각 Skill 폴더의 `LICENSE`와 `SKILL.md` 안에 남겨 두고, upstream 자체에 대한
 평가 메모는 [resource-library/external/coding-agent-skills-yt.md](resource-library/external/coding-agent-skills-yt.md)에 둔다.
 
