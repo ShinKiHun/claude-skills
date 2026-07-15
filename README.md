@@ -45,8 +45,37 @@ Claude Code와 Codex에서 함께 사용하는 개인 연구 Skill, prompt libra
 |---|---|---|---|
 | [expand-task-brief](skills/expand-task-brief/) | active | 짧거나 모호한 요청을 실행 가능한 제작 명세로 확장해야 할 때 | “이 논문으로 수준급 발표자료 만들어줘” |
 | [meeting-report](skills/meeting-report/) | active | 연구 진행 상황을 일일 또는 주간 미팅 자료로 만들 때 | “자료 제작”, “총자료 제작” |
+| [caveman](skills/caveman/) | active | 응답이 길어져 토큰이 아까울 때. 전역 규칙을 설치하면 상시 적용된다 | “간결하게”, “짧게”, “토큰 줄여”, “결론만” |
+| [grilling](skills/grilling/) | active | 새 계산 셀·장시간 계산·해석을 바꾸는 방법론을 정하기 전 | “갈궈봐”, “계획 물어봐”, “하나씩 물어봐”, “합의부터 하자” |
 
 기계가 읽을 수 있는 전체 목록과 경로는 [catalog.yaml](catalog.yaml)에 있다.
+
+`caveman`과 `grilling`은 외부 MIT Skill을 이 저장소 기준으로 고쳐 쓰는 fork다. 출처와
+원문 라이선스는 각 Skill 폴더의 `LICENSE`와 `SKILL.md` 안에 남겨 두고, upstream 자체에 대한
+평가 메모는 [resource-library/external/coding-agent-skills-yt.md](resource-library/external/coding-agent-skills-yt.md)에 둔다.
+
+## 전역 규칙 (선택 설치)
+
+[global/user-CLAUDE.md](global/user-CLAUDE.md)를 `~/.claude/CLAUDE.md`로 연결하면 **모든 폴더의
+모든 세션**이 자동으로 읽는다. 매번 `/caveman`을 치지 않아도 된다.
+
+```bash
+./install.sh --target claude --skill '*' --global-rules
+```
+
+```powershell
+.\install.ps1 -Target Claude -Skill '*' -GlobalRules
+```
+
+`--global-rules`는 **명시할 때만** 동작한다. Skill 설치의 부수효과로 남의 전역 설정을 덮지
+않기 위해서다. 기존 `~/.claude/CLAUDE.md`가 실제 파일이면 `.bak.<timestamp>`으로 백업한 뒤
+링크한다. 다른 경로를 쓰려면 `CLAUDE_GLOBAL_RULES` 환경 변수로 덮어쓴다.
+
+담긴 규칙은 세 가지다.
+
+- 답변은 항상 caveman 스타일 (`/caveman`을 치지 않아도 켜져 있음)
+- 새 셀·장시간 계산·방법론 결정 전에는 grilling으로 합의부터
+- 코드 3규칙: 결과는 print로 출력 / 완료 후 처음부터 재검토 / 타 폴더 코드는 참조하되 오류는 명시하고 고쳐 씀
 
 ## 설치
 
@@ -111,10 +140,15 @@ Linux, macOS, 연구 서버:
 claude-skills/
 ├─ AGENTS.md                 # 모든 에이전트가 따르는 설치·관리 계약
 ├─ CLAUDE.md                 # Claude Code가 AGENTS.md를 읽도록 연결
-├─ catalog.yaml              # Skill과 외부 프로젝트의 기계 판독용 색인
+├─ catalog.yaml              # Skill, 전역 규칙, 외부 프로젝트의 기계 판독용 색인
 ├─ skills/
+│  ├─ caveman/              # fork: JuliusBrussee/caveman (MIT)
 │  ├─ expand-task-brief/
+│  ├─ grilling/             # fork: mattpocock/skills (MIT)
+│  ├─ handoff/
 │  └─ meeting-report/
+├─ global/
+│  └─ user-CLAUDE.md        # ~/.claude/CLAUDE.md 로 연결 (--global-rules 로 선택 설치)
 ├─ prompt-library/
 │  ├─ catalog.yaml           # 프롬프트 컬렉션과 파일의 기계 판독용 색인
 │  ├─ inbox/                 # 아직 검증하지 않은 수집 자료

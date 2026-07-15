@@ -96,26 +96,37 @@ resources:
     kind: "external-skill"
     name: "caveman"
     upstream: "https://github.com/JuliusBrussee/caveman"
-    frequency: "occasional"
+    frequency: "core"
     use_for:
       - "출력 토큰 절약을 위한 terse 응답 모드 (코드·명령어·에러 문자열은 원문 유지)"
       - "위험·되돌릴 수 없는 작업에서는 자동으로 완전한 문장으로 전환한 뒤 복귀"
     tags: ["token-efficiency", "terse", "output-style"]
-    note: "Matt Pocock의 원본 caveman에서 파생"
-    tested_locally: false
+    note: >
+      2026-07-15 채택. 커스텀 fork를 skills/caveman 으로 관리하므로 설치는 이 저장소
+      install 스크립트를 쓴다. upstream 은 참고용. (이전 메모의 'Matt Pocock의 원본
+      caveman에서 파생' 은 오류라 수정: LICENSE 기준 저작자는 Julius Brussee,
+      Matt Pocock 은 grilling 쪽 upstream 이다.)
+    adopted_as: "skills/caveman"
+    license: "MIT (c) Julius Brussee"
+    tested_locally: true
 
   - id: "mattpocock-skills"
     collection: "coding-agent-skills-yt"
     kind: "external-skill-collection"
     name: "mattpocock/skills"
     upstream: "https://github.com/mattpocock/skills"
-    frequency: "rare"
+    frequency: "occasional"
     use_for:
       - "코딩·구현 전 계획을 집요하게 인터뷰해 범위를 확정 (grill)"
       - "TDD, triage, code-review 등 소프트웨어 엔지니어링 워크플로 전반"
     tags: ["engineering-workflow", "planning", "grill", "tdd", "typescript"]
-    note: "grill(계획 인터뷰)만 연구 작업 범위 정리에 유용, 나머지는 SW 개발 위주"
-    tested_locally: false
+    note: >
+      2026-07-15 부분 채택. 모음 중 grilling(계획 인터뷰) 하나만 커스텀 fork 로 가져와
+      skills/grilling 으로 관리한다. 나머지(TDD·triage·code-review)는 SW 개발 위주라
+      연구 워크플로에는 아직 안 가져옴.
+    adopted_as: "skills/grilling"
+    license: "MIT (c) Matt Pocock"
+    tested_locally: true
 
   - id: "everything-claude-code"
     collection: "coding-agent-skills-yt"

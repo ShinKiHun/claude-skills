@@ -8,7 +8,10 @@ param(
     [ValidateSet('Junction', 'Copy')]
     [string]$Mode = 'Junction',
 
-    [switch]$List
+    [switch]$List,
+
+    # Opt-in: link global/user-CLAUDE.md to ~/.claude/CLAUDE.md (backs up an existing file).
+    [switch]$GlobalRules
 )
 
 $ErrorActionPreference = 'Stop'
@@ -121,6 +124,51 @@ foreach ($source in $SelectedSkills) {
     }
     if ($Target -in @('Codex', 'All')) {
         Install-Skill -Source $source -TargetRoot $CodexDir
+    }
+}
+
+# Opt-in only: this replaces the user-level CLAUDE.md that every session in every
+# folder loads, so it must never happen as a side effect of installing a skill.
+if ($GlobalRules) {
+    $rulesSource = Join-Path $RepoDir 'global\user-CLAUDE.md'
+    if (-not (Test-Path -LiteralPath $rulesSource)) {
+        throw "Global rules not found: $rulesSource"
+    }
+
+    $claudeMd = if ($env:CLAUDE_GLOBAL_RULES) {
+        $env:CLAUDE_GLOBAL_RULES
+    } else {
+        Join-Path $HOME '.claude\CLAUDE.md'
+    }
+    New-Item -ItemType Directory -Path (Split-Path -Parent $claudeMd) -Force | Out-Null
+
+    if (Test-Path -LiteralPath $claudeMd) {
+        $existing = Get-Item -LiteralPath $claudeMd -Force
+        if (($existing.Attributes -band [IO.FileAttributes]::ReparsePoint) -eq 0) {
+            # Skip the backup when the file is already our rules: if symlink creation fell back
+            # to a copy, an unguarded rerun would pile up identical .bak files.
+            $sameContent = (Get-FileHash -LiteralPath $claudeMd).Hash -eq
+                (Get-FileHash -LiteralPath $rulesSource).Hash
+            if (-not $sameContent) {
+                $backup = "$claudeMd.bak." + (Get-Date -Format 'yyyyMMddHHmmss')
+                Copy-Item -LiteralPath $claudeMd -Destination $backup
+                Write-Host "backed up existing global rules: $backup"
+            }
+        }
+        Remove-Item -LiteralPath $claudeMd -Force
+    }
+
+    try {
+        New-Item -ItemType SymbolicLink -Path $claudeMd -Target $rulesSource | Out-Null
+        Write-Host "installed global rules: $claudeMd -> $rulesSource"
+    } catch {
+        Write-Warning 'Symlink creation failed; falling back to a copy. Rerun after git pull to update it.'
+        Copy-Item -LiteralPath $rulesSource -Destination $claudeMd
+        Write-Host "copied global rules: $claudeMd"
+    }
+
+    if (-not (Test-Path -LiteralPath $claudeMd)) {
+        throw "Verification failed: $claudeMd is not readable"
     }
 }
 

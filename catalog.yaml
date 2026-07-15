@@ -3,6 +3,16 @@ repository:
   owner: "ShinKiHun"
   purpose: "Shared Claude Code and Codex research workflows and reference libraries"
 
+global_rules:
+  path: "global/user-CLAUDE.md"
+  installs_to: "~/.claude/CLAUDE.md"
+  install_with: "./install.sh --global-rules   |   .\\install.ps1 -GlobalRules"
+  opt_in: true
+  use_for:
+    - "Always-on caveman output style, without typing /caveman each session."
+    - "Requiring grilling agreement before designing a cell or submitting a long calculation."
+    - "The user's three code rules: print results, re-review after finishing, fix errors in borrowed code."
+
 prompt_library:
   catalog: "prompt-library/catalog.yaml"
   collection_count: 1
@@ -55,6 +65,34 @@ skills:
       - "총자료 제작"
       - "daily research report"
       - "weekly meeting report"
+
+  - name: "caveman"
+    path: "skills/caveman"
+    status: "active"
+    purpose: "Compress response output while keeping every technical detail. Customized fork of JuliusBrussee/caveman (MIT)."
+    upstream: "https://github.com/JuliusBrussee/caveman"
+    triggers:
+      - "간결하게"
+      - "짧게"
+      - "토큰 줄여"
+      - "결론만"
+      - "/caveman"
+      - "The user asks for shorter or cheaper output."
+      - "Always on when global/user-CLAUDE.md is installed."
+
+  - name: "grilling"
+    path: "skills/grilling"
+    status: "active"
+    purpose: "Interview the plan one question at a time until shared understanding, before writing code. Customized fork of mattpocock/skills (MIT)."
+    upstream: "https://github.com/mattpocock/skills"
+    triggers:
+      - "갈궈봐"
+      - "계획 물어봐"
+      - "하나씩 물어봐"
+      - "합의부터 하자"
+      - "/grilling"
+      - "A new Matlantis cell or long-running calculation is being designed."
+      - "A methodology decision would change how results are interpreted."
 
   - name: "handoff"
     path: "skills/handoff"
