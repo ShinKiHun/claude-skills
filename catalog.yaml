@@ -171,6 +171,17 @@ skills:
       - "what's it called when…"
       - "Describing a motion effect without knowing its name, to prompt an AI/designer."
 
+  - name: "paper-report"
+    path: "skills/paper-report"
+    status: "active"
+    purpose: "Turn user-supplied research paper PDFs (and our own result data) into a figure-rich, professor-facing Korean research-meeting report as self-contained HTML + PNG figures. Extracts the papers' own figures from the PDF, plots our calculation data, and renders concept diagrams in one visual system."
+    triggers:
+      - "논문 미팅자료"
+      - "논문 보고자료"
+      - "사전조사 자료 제작"
+      - "논문 figure 뽑아서 자료"
+      - "The user supplies paper PDFs and wants a figure-rich survey/meeting report."
+
 external_projects:
   - name: "computational-paper-review-deck"
     url: "https://github.com/ShinKiHun/computational-paper-review-deck"

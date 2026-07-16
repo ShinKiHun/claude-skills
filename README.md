@@ -45,6 +45,7 @@ Claude Code와 Codex에서 함께 사용하는 개인 연구 Skill, prompt libra
 |---|---|---|---|
 | [expand-task-brief](skills/expand-task-brief/) | active | 짧거나 모호한 요청을 실행 가능한 제작 명세로 확장해야 할 때 | “이 논문으로 수준급 발표자료 만들어줘” |
 | [meeting-report](skills/meeting-report/) | active | 연구 진행 상황을 일일 또는 주간 미팅 자료로 만들 때 | “자료 제작”, “총자료 제작” |
+| [paper-report](skills/paper-report/) | active | 유저가 준 논문 PDF(+우리 데이터)를 figure-rich 한국어 미팅 보고 HTML로 만들 때 | “논문 미팅자료”, “논문 보고자료”, “사전조사 자료 제작” |
 | [caveman](skills/caveman/) | active | 응답이 길어져 토큰이 아까울 때. 전역 규칙을 설치하면 상시 적용된다 | “간결하게”, “짧게”, “토큰 줄여”, “결론만” |
 | [grilling](skills/grilling/) | active | 새 계산 셀·장시간 계산·해석을 바꾸는 방법론을 정하기 전 | “갈궈봐”, “계획 물어봐”, “하나씩 물어봐”, “합의부터 하자” |
 | [handoff](skills/handoff/) | active | 세션을 이어받거나 마무리하며 컨텍스트를 넘길 때 | “이어서”, “어디까지 했지”, “핸드오프”, “오늘 정리” |
@@ -159,7 +160,8 @@ claude-skills/
 │  ├─ expand-task-brief/
 │  ├─ grilling/             # fork: mattpocock/skills (MIT)
 │  ├─ handoff/
-│  └─ meeting-report/
+│  ├─ meeting-report/
+│  └─ paper-report/
 ├─ global/
 │  └─ user-CLAUDE.md        # ~/.claude/CLAUDE.md 로 연결 (--global-rules 로 선택 설치)
 ├─ prompt-library/

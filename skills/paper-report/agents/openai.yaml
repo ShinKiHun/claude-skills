@@ -1,0 +1,4 @@
+interface:
+  display_name: "Paper Report"
+  short_description: "Build a figure-rich Korean research-meeting report from paper PDFs + our data"
+  default_prompt: "Use $paper-report to turn the supplied paper PDFs (and our result data) into a figure-rich, professor-facing Korean research-meeting report (HTML + PNG figures)."

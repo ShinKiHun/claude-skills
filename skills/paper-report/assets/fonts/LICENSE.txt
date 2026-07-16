@@ -1,0 +1,6 @@
+NanumSquare — © NAVER Corp.
+무료 폰트. 개인·상업적 사용 및 재배포 허용(폰트 자체 유료 판매 금지).
+https://hangeul.naver.com/font
+
+이 스킬은 리포트를 자체완결(self-contained)로 만들기 위해 NanumSquare(R/B/EB)를
+HTML @font-face에 임베드한다. *_fix2.ttf 는 matplotlib space-glyph 렌더 이슈 회피용 사본.
