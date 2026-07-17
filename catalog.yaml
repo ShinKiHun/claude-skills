@@ -12,6 +12,8 @@ global_rules:
     - "Always-on caveman output style, without typing /caveman each session."
     - "Requiring grilling agreement before designing a cell or submitting a long calculation."
     - "The user's three code rules: print results, re-review after finishing, fix errors in borrowed code."
+    - "Facts only, no fabrication: say so when unknown, cite only verified DOIs/numbers."
+    - "Label evidence level: 추정 (assumed) / 문헌확인 (literature) / 계산확인 (computed)."
 
 prompt_library:
   catalog: "prompt-library/catalog.yaml"
@@ -106,6 +108,18 @@ skills:
       - "오늘 정리"
       - "월간 정리"
       - "resume / hand off session"
+
+  - name: "project-init"
+    path: "skills/project-init"
+    status: "active"
+    purpose: "One-shot scaffold a new project/research folder: lean CLAUDE.md, STATUS.md, LOG.md (handoff-compatible), and ref/code/analysis/reports skeleton. Field-agnostic; relies on global ~/.claude/CLAUDE.md for the always-on universal rules."
+    triggers:
+      - "프로젝트 세팅"
+      - "폴더 세팅"
+      - "새 프로젝트 시작"
+      - "여기 세팅해줘"
+      - "리서치 폴더 초기화"
+      - "project init / scaffold this folder"
 
   - name: "apple-design"
     path: "skills/apple-design"

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Project Init"
+  short_description: "One-shot scaffold a new project folder (CLAUDE.md, STATUS/LOG, folder skeleton)"
+  default_prompt: "Use $project-init to scaffold this folder: create a lean CLAUDE.md, STATUS.md, LOG.md (handoff format), and the ref/code/analysis/reports skeleton."
