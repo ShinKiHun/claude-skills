@@ -182,6 +182,20 @@ skills:
       - "논문 figure 뽑아서 자료"
       - "The user supplies paper PDFs and wants a figure-rich survey/meeting report."
 
+  - name: "humanizer"
+    path: "skills/humanizer"
+    status: "active"
+    purpose: "Remove signs of AI-generated writing so text reads naturally human. 33+ patterns from Wikipedia's 'Signs of AI writing' (inflated symbolism, promotional language, rule of three, em-dash overuse, AI vocabulary, negative parallelisms). Optional voice calibration from writing samples + second-pass audit. Vendored verbatim from blader/humanizer (MIT)."
+    upstream: "https://github.com/blader/humanizer"
+    license: "MIT (c) 2025 Siqi Chen — see skills/humanizer/LICENSE"
+    triggers:
+      - "휴먼틱하게"
+      - "사람이 쓴 것처럼"
+      - "AI 티 빼줘"
+      - "자연스럽게 다듬어"
+      - "/humanizer"
+      - "Editing or reviewing text to strip AI-sounding patterns before publishing."
+
 external_projects:
   - name: "computational-paper-review-deck"
     url: "https://github.com/ShinKiHun/computational-paper-review-deck"

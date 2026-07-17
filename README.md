@@ -54,6 +54,7 @@ Claude Code와 Codex에서 함께 사용하는 개인 연구 Skill, prompt libra
 | [review-animations](skills/review-animations/) | active | 애니메이션·모션 코드를 엄격한 기준으로 리뷰할 때 (명시 호출 전용) | “애니메이션 리뷰해줘”, `/review-animations` |
 | [improve-animations](skills/improve-animations/) | active | 코드베이스 전체 모션을 감사해 우선순위 개선 계획이 필요할 때 (소스는 수정 안 함) | “애니메이션 개선해줘”, “앱 느낌 좋게” |
 | [animation-vocabulary](skills/animation-vocabulary/) | active | 모션 효과의 정확한 명칭을 찾아 프롬프트에 쓰고 싶을 때 | “이거 뭐라고 불러?”, “이 효과 이름이 뭐야” |
+| [humanizer](skills/humanizer/) | active | 글을 사람이 쓴 것처럼 다듬어 AI 티를 뺄 때 | “휴먼틱하게”, “AI 티 빼줘”, “자연스럽게 다듬어” |
 
 기계가 읽을 수 있는 전체 목록과 경로는 [catalog.yaml](catalog.yaml)에 있다.
 
@@ -63,6 +64,10 @@ Claude Code와 Codex에서 함께 사용하는 개인 연구 Skill, prompt libra
 **수정 없이 그대로 벤더링**한 것이다. 출처와
 원문 라이선스는 각 Skill 폴더의 `LICENSE`와 `SKILL.md` 안에 남겨 두고, upstream 자체에 대한
 평가 메모는 [resource-library/external/coding-agent-skills-yt.md](resource-library/external/coding-agent-skills-yt.md)에 둔다.
+
+`humanizer`는 [blader/humanizer](https://github.com/blader/humanizer) (MIT, © 2025 Siqi Chen)를
+**수정 없이 그대로 벤더링**한 것이다. 위키백과의 "Signs of AI writing" 패턴으로 글에서
+AI가 쓴 티를 제거해 사람이 쓴 것처럼 다듬는다.
 
 ## 전역 규칙 (선택 설치)
 
