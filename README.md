@@ -106,9 +106,20 @@ git clone https://github.com/ShinKiHun/claude-skills.git $HOME\claude-skills
 않기 위해서다. 기존 `~/.claude/CLAUDE.md`가 실제 파일이면 `.bak.<timestamp>`으로 백업한 뒤
 링크한다. 다른 경로를 쓰려면 `CLAUDE_GLOBAL_RULES` 환경 변수로 덮어쓴다.
 
-Windows에서 파일 symlink는 관리자 권한이나 개발자 모드가 필요하다. 권한이 없으면 설치기가
-경고를 내고 **복사로 대체**하므로, 전역 규칙은 `git pull` 후 `-GlobalRules`를 다시 실행해야
-갱신된다(Skill 폴더는 junction이라 자동 반영된다). 같은 내용이면 `.bak`을 다시 만들지 않는다.
+Windows에서 symlink와 junction은 **둘 다** 관리자 권한이나 개발자 모드를 요구한다. 권한이
+없으면 설치기가 경고를 내고 **전역 규칙도 Skill 폴더도 복사로 대체**한다. 복사본은 `git pull`을
+따라오지 않으므로, 규칙이나 Skill을 고쳤으면 **`.\setup.ps1`을 다시 실행**해야 로컬에 반영된다.
+같은 내용이면 `.bak`을 다시 만들지 않는다.
+
+현재 기기가 링크인지 복사인지는 이렇게 확인한다. `ReparsePoint=False`면 복사본이다.
+
+```powershell
+(Get-Item "$HOME\.claude\CLAUDE.md" -Force).Attributes
+Get-ChildItem "$HOME\.claude\skills" -Directory | ForEach-Object { "$($_.Name): $($_.Attributes)" }
+```
+
+개발자 모드(설정 → 개인 정보 및 보안 → 개발자용)를 켠 뒤 `.\setup.ps1`을 한 번 더 실행하면
+링크로 바뀌어 이후로는 `git pull`만으로 갱신된다. Linux/macOS는 기본이 링크라 해당 없다.
 
 담긴 규칙은 여덟 가지다.
 
