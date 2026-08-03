@@ -6,14 +6,17 @@ repository:
 global_rules:
   path: "global/user-CLAUDE.md"
   installs_to: "~/.claude/CLAUDE.md"
-  install_with: "./install.sh --global-rules   |   .\\install.ps1 -GlobalRules"
+  install_with: "./setup.sh   |   .\\setup.ps1   (wrappers for ./install.sh --global-rules)"
   opt_in: true
+  note: "Not a Skill — a single rules file, so it never appears under --list."
   use_for:
     - "Always-on caveman output style, without typing /caveman each session."
     - "Requiring grilling agreement before designing a cell or submitting a long calculation."
     - "The user's three code rules: print results, re-review after finishing, fix errors in borrowed code."
     - "Facts only, no fabrication: say so when unknown, cite only verified DOIs/numbers."
     - "Label evidence level: 추정 (assumed) / 문헌확인 (literature) / 계산확인 (computed)."
+    - "Adversarial review (rule 7): assume the project succeeding is against your interest; doubt and question the user's hypotheses instead of agreeing by default."
+    - "Triple verification (rule 8): before reporting, verify along three different axes — run it, re-read the source, try to falsify. Repeating one check three times is banned."
 
 prompt_library:
   catalog: "prompt-library/catalog.yaml"

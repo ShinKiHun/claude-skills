@@ -73,7 +73,26 @@ AI가 쓴 티를 제거해 사람이 쓴 것처럼 다듬는다.
 ## 전역 규칙 (선택 설치)
 
 [global/user-CLAUDE.md](global/user-CLAUDE.md)를 `~/.claude/CLAUDE.md`로 연결하면 **모든 폴더의
-모든 세션**이 자동으로 읽는다. 매번 `/caveman`을 치지 않아도 된다.
+모든 세션**이 자동으로 읽는다. 매번 `/caveman`을 치지 않아도 된다. Skill이 아니라 규칙 파일
+하나이므로 `--list`에는 나오지 않는다.
+
+새 기기에서는 `setup.sh` 한 줄이면 전역 규칙과 Skill 전부가 함께 설치된다.
+
+```bash
+git clone https://github.com/ShinKiHun/claude-skills.git ~/claude-skills
+~/claude-skills/setup.sh
+```
+
+```powershell
+git clone https://github.com/ShinKiHun/claude-skills.git $HOME\claude-skills
+& $HOME\claude-skills\setup.ps1
+```
+
+`setup.sh`는 `install.sh --global-rules`를 부르는 얇은 래퍼다(`install.sh`는 기본값으로 Skill
+전부를 설치한다). 추가 인자는 그대로 전달되므로 `./setup.sh --target claude`처럼 좁힐 수 있다.
+갱신은 `cd ~/claude-skills && git pull && ./setup.sh`.
+
+설치기를 직접 부르려면 다음과 같다.
 
 ```bash
 ./install.sh --target claude --skill '*' --global-rules
@@ -91,13 +110,19 @@ Windows에서 파일 symlink는 관리자 권한이나 개발자 모드가 필�
 경고를 내고 **복사로 대체**하므로, 전역 규칙은 `git pull` 후 `-GlobalRules`를 다시 실행해야
 갱신된다(Skill 폴더는 junction이라 자동 반영된다). 같은 내용이면 `.bak`을 다시 만들지 않는다.
 
-담긴 규칙은 다섯 가지다.
+담긴 규칙은 여덟 가지다.
 
-- 답변은 항상 caveman 스타일 (`/caveman`을 치지 않아도 켜져 있음)
-- 새 셀·장시간 계산·방법론 결정 전에는 grilling으로 합의부터
-- 코드 3규칙: 결과는 print로 출력 / 완료 후 처음부터 재검토 / 타 폴더 코드는 참조하되 오류는 명시하고 고쳐 씀
-- 팩트만·날조 금지: 없는 지식 지어내지 말고, 문헌·데이터 없으면 없다고. DOI·수치는 검증된 것만
-- 가정 vs 확정 표기: `추정`/`문헌확인`/`계산확인`으로 근거 수준 명시
+1. 답변은 항상 caveman 스타일 (`/caveman`을 치지 않아도 켜져 있음)
+2. 새 셀·장시간 계산·방법론 결정 전에는 grilling으로 합의부터
+3. 코드 3규칙: 결과는 print로 출력 / 완료 후 처음부터 재검토 / 타 폴더 코드는 참조하되 오류는 명시하고 고쳐 씀
+4. 팩트만·날조 금지: 없는 지식 지어내지 말고, 문헌·데이터 없으면 없다고. DOI·수치는 검증된 것만
+5. 가정 vs 확정 표기: `추정`/`문헌확인`/`계산확인`으로 근거 수준 명시
+6. 하지 말 것: 코드 붙여넣기 금지(작업 중인 `.py` 끝에 셀로 추가), over-engineering 금지
+7. **적대적 검토 — 무조건 OK 금지**: 프로젝트가 성공하면 불이익을 받는 입장으로 가정하고 사용자 가설을 먼저 의심·질문한다. 목표는 반대가 아니라 상호 납득 가설로의 수렴
+8. **3중 검증 — 보고 전 필수**: 서로 다른 축 3개(①실행 검증 ②원문 대조 ③반증 시도)로 확인한 뒤 보고한다. 같은 검증 3회는 오류를 3회 재생산할 뿐이므로 금지
+
+7·8번은 항상 켜져 있어야 의미가 있으므로 Skill로 빼지 않는다. 호출해야 켜지는 "항상 의심하라"는
+필요한 시점에 이미 늦는다.
 
 ## 설치
 
@@ -186,7 +211,9 @@ claude-skills/
 │  └─ external/              # 원문을 복제하지 않은 출처·용도·검증 메모
 ├─ evals/                    # 실제 요청으로 Skill 동작을 확인하는 사례
 ├─ install.ps1
-└─ install.sh
+├─ install.sh
+├─ setup.ps1                 # install.ps1 -GlobalRules 래퍼 (새 기기 진입점)
+└─ setup.sh                  # install.sh --global-rules 래퍼 (새 기기 진입점)
 ```
 
 ## Prompt, Resource, Skill의 차이
