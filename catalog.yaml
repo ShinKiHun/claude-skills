@@ -213,6 +213,16 @@ skills:
       - "/humanizer"
       - "Editing or reviewing text to strip AI-sounding patterns before publishing."
 
+  - name: "xfer"
+    path: "skills/xfer"
+    status: "active"
+    purpose: "Transfer folders between the server this Claude session runs on (LOCAL) and a remote gateway server (REMOTE) via scp/rsync. Auto-resolves direction, the scp port flag (-P not -p), and that commands always run from LOCAL. Covers sending to another user's account. Server constants (host/port/user) are placeholders filled per environment — no real host info in the skill."
+    triggers:
+      - "A 를 B 하위로 보내 / 가져와 (두 서버 간 push·pull)"
+      - "push/pull folders between LOCAL and a REMOTE gateway server"
+      - "남의 계정으로 파일 보내"
+      - "scp/rsync 서버 전송·백업"
+
 external_projects:
   - name: "computational-paper-review-deck"
     url: "https://github.com/ShinKiHun/computational-paper-review-deck"
