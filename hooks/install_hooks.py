@@ -18,9 +18,18 @@
 import argparse
 import json
 import os
+import re
 import shutil
 import sys
 import time
+
+# Windows 콘솔 기본 인코딩(cp949)은 em dash 같은 문자를 못 써서 print 가 죽는다.
+# 설치기가 출력 때문에 실패하면 안 되므로 UTF-8 로 고정한다.
+for _stream in (sys.stdout, sys.stderr):
+    try:
+        _stream.reconfigure(encoding="utf-8", errors="replace")
+    except (AttributeError, OSError):
+        pass
 
 # (이벤트, 스크립트 파일명, 타임아웃, 스피너 문구)
 HOOK_SPECS = [
@@ -57,12 +66,62 @@ def load_settings(path):
     return json.loads(text), True
 
 
+def check(settings_path):
+    """설치된 훅이 실제 존재하는 파일을 가리키는지 확인.
+
+    훅 커맨드에는 `[ -f "$H" ]` 가드가 있어서, 저장소를 옮기거나 지우면 훅이
+    **에러 없이 조용히** 아무것도 하지 않는다. 조용한 고장은 눈에 띄지 않으므로
+    확인할 수단이 필요하다. 종료코드 0=정상, 1=고장/미설치.
+    """
+    if not os.path.isfile(settings_path):
+        print(f"훅 미설치: {settings_path} 없음")
+        return 1
+    try:
+        with open(settings_path, encoding="utf-8") as fh:
+            settings = json.load(fh)
+    except (json.JSONDecodeError, OSError) as exc:
+        print(f"ERROR: settings.json 을 읽을 수 없음: {exc}", file=sys.stderr)
+        return 1
+
+    found = broken = 0
+    for event, groups in (settings.get("hooks") or {}).items():
+        if not isinstance(groups, list):
+            continue
+        for group in groups:
+            for hook in group.get("hooks", []):
+                cmd = hook.get("command", "")
+                if not any(name in cmd for name in OURS):
+                    continue
+                found += 1
+                match = re.search(r"H='([^']+)'", cmd)
+                path = match.group(1) if match else None
+                exists = bool(path) and os.path.isfile(path)
+                if not exists:
+                    broken += 1
+                print(f"  {'OK  ' if exists else 'BROKEN'} {event:13s} {path}")
+
+    if found == 0:
+        print("훅 미설치 — setup.sh 를 실행할 것")
+        return 1
+    if broken:
+        print(f"{broken}/{found} 개가 사라진 경로를 가리킴 (저장소를 옮겼나?).")
+        print("  이 훅들은 에러 없이 조용히 통과한다. 저장소에서 ./setup.sh 재실행할 것.")
+        return 1
+    print(f"훅 {found}개 정상")
+    return 0
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("repo_dir", help="claude-skills 저장소 경로")
     ap.add_argument("--settings", default=None, help="기본: ~/.claude/settings.json")
     ap.add_argument("--uninstall", action="store_true", help="우리 훅만 제거")
     ap.add_argument("--dry-run", action="store_true", help="쓰지 않고 결과만 출력")
+    ap.add_argument(
+        "--check",
+        action="store_true",
+        help="설치된 훅이 실제 존재하는 파일을 가리키는지 확인만 한다 (쓰지 않음)",
+    )
     args = ap.parse_args()
 
     repo = os.path.abspath(args.repo_dir).replace("\\", "/")
@@ -71,11 +130,14 @@ def main():
         os.path.expanduser("~"), ".claude", "settings.json"
     )
 
-    if not args.uninstall:
+    if not args.uninstall and not args.check:
         missing = [n for _, n, _, _ in HOOK_SPECS if not os.path.isfile(os.path.join(hooks_dir, n))]
         if missing:
             print(f"ERROR: 훅 스크립트를 찾을 수 없음: {missing} (in {hooks_dir})", file=sys.stderr)
             return 1
+
+    if args.check:
+        return check(settings_path)
 
     try:
         settings, existed = load_settings(settings_path)

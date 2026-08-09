@@ -23,6 +23,7 @@ continuity_hooks:
   installs_to: "~/.claude/settings.json (merged, never overwritten)"
   install_with: "./setup.sh   |   .\\setup.ps1   (runs hooks/install_hooks.py)"
   uninstall_with: "python hooks/install_hooks.py <repo> --uninstall"
+  verify_with: "python hooks/install_hooks.py <repo> --check   (exit 0 = alive; the [ -f ] guard makes a moved repo fail silently)"
   requires: "python3 or python on PATH; skipped with a warning otherwise"
   hooks:
     - event: "SessionStart"

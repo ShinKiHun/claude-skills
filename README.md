@@ -155,9 +155,14 @@ Claude 가 틀린 어제를 자신 있게 말하게 된다. 그래서 낡음을 
 JSON 을 되읽어 검증한다. 깨진 settings.json 은 아예 건드리지 않고 종료한다.
 
 ```bash
+python hooks/install_hooks.py <repo> --check       # 훅이 살아있는지 확인 (0=정상)
 python hooks/install_hooks.py <repo> --dry-run     # 쓰지 않고 결과만
 python hooks/install_hooks.py <repo> --uninstall   # 우리 훅만 제거
 ```
+
+`--check` 가 필요한 이유: 훅 커맨드에는 `[ -f "$H" ]` 가드가 있어서 저장소를 옮기거나
+지우면 **에러 없이 조용히** 아무것도 하지 않는다. 조용한 고장은 눈에 띄지 않는다.
+"어제 상태가 안 불러와지는 것 같다" 싶으면 이걸 먼저 돌려라.
 
 연속성 파일이 없는 폴더에서는 두 훅 모두 **조용히 통과**하므로 전역 설치해도 무해하다.
 `python` 이 없으면 훅만 건너뛰고 Skill·전역 규칙 설치는 정상 진행된다. Windows 에서
