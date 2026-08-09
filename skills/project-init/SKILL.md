@@ -1,6 +1,6 @@
 ---
 name: project-init
-description: One-shot scaffolding for a new project/research folder. Run once in a directory to create a lean CLAUDE.md, STATUS.md, LOG.md (handoff-compatible), and the ref/ code/ analysis/ reports/ skeleton so the folder is ready for continuous work. Field-agnostic. Relies on the global ~/.claude/CLAUDE.md for the always-on universal rules (caveman, grilling, facts-only, assumption-vs-confirmed). Use when starting a new project or setting up a folder. Korean triggers: "프로젝트 세팅", "폴더 세팅", "project init", "새 프로젝트 시작", "여기 세팅해줘", "리서치 폴더 초기화".
+description: One-shot scaffolding for a new project/research folder. Run once in a directory to create a lean CLAUDE.md, STATUS.md, LOG.md (handoff-compatible), and the ref/ code/ analysis/ reports/ skeleton so the folder is ready for continuous work. Field-agnostic. Relies on the global ~/.claude/CLAUDE.md for the always-on universal rules (caveman, grilling, facts-only, assumption-vs-confirmed). Use when starting a new project or setting up a folder. Korean triggers — "프로젝트 세팅", "폴더 세팅", "project init", "새 프로젝트 시작", "여기 세팅해줘", "리서치 폴더 초기화".
 ---
 
 # project-init
@@ -17,22 +17,33 @@ description: One-shot scaffolding for a new project/research folder. Run once in
 현재 폴더에:
 ```
 <cwd>/
- ├ CLAUDE.md    # 얇은 프로젝트 규칙(개요·폴더맵·연속성·전역규칙 적용 명시)
- ├ STATUS.md    # 현재 상태 1p (handoff 포맷)
- ├ LOG.md       # 누적 기록 (handoff 포맷)
- ├ ref/         # 참고문헌/자료 (원문 PDF 등)
- ├ code/        # 코드/입력
- ├ analysis/    # 분석 스크립트·플롯·가공데이터
- └ reports/     # 보고 산출물 (HTML 등)
+ ├ CLAUDE.md      # 얇은 프로젝트 규칙(개요·폴더맵·연속성·전역규칙 적용 명시)
+ ├ STATUS.md      # 현재 상태 1p — 덮어쓰기 (handoff 포맷)
+ ├ LOG.md         # 시간축 누적 — append (handoff 포맷)
+ ├ dead-ends.md   # 이미 실패한 것 — 영구. 매 세션 자동 주입
+ ├ decisions/     # 결정 1건 = 파일 1개 (ADR). 사안별 조회용
+ ├ ref/           # 참고문헌/자료 (원문 PDF 등)
+ ├ code/          # 코드/입력
+ ├ analysis/      # 분석 스크립트·플롯·가공데이터
+ └ reports/       # 보고 산출물 (HTML 등)
 ```
 각 폴더에 `.gitkeep` 또는 짧은 `README.md` 한 줄.
+
+**`dead-ends.md` 와 `decisions/` 를 왜 따로 두나**: 날짜별 LOG만 쌓으면 나중에 못 찾는다.
+아무도 *"7월 22일에 뭐 했지?"* 로 검색하지 않고 **"이거 왜 이렇게 정했지?"** 로 찾는다.
+그리고 이 둘은 **다음 세션이 매번 읽는 대상**이라 짧게 유지돼야 한다 — LOG에 묻히면
+읽히지 않는다. 포맷은 `handoff` 스킬의 `references/templates.md` §4·§5 를 따른다.
 
 ## 워크플로우
 1. **cwd 확인.** 실행된 디렉토리가 프로젝트 루트. 이미 CLAUDE.md/STATUS.md/LOG.md가 있으면 **덮지 않는다**(idempotent) — 없는 것만 만든다. 있으면 "이미 있음"이라고 알림.
 2. **프로젝트 정보 파악.** 폴더명·기존 파일을 보고 프로젝트 성격을 추정. 목표가 불명확하면 유저에게 **한 줄**만 물음("이 프로젝트 한 줄 목표?"). 나머지는 placeholder로 두고 진행.
 3. **템플릿으로 생성.** `references/templates.md`의 CLAUDE.md / STATUS.md / LOG.md 템플릿을 이 폴더에 맞게 채워 씀. 폴더 골격 mkdir.
    - CLAUDE.md는 **얇게**(전역규칙이 이미 항상 적용되므로 중복 나열 금지, "전역규칙 적용됨"만 명시 + 프로젝트 고유 내용).
-4. **결과 print/요약.** 만든 파일·폴더 목록 출력. "handoff로 이어서 기록, meeting-report/paper-report로 보고" 안내 한 줄.
+   - `dead-ends.md` 는 헤더만 있는 빈 파일로, `decisions/` 는 빈 디렉토리(+`.gitkeep`)로 만든다.
+4. **연속성 훅 확인.** `SessionStart` 훅이 없으면 새 창을 열 때 STATUS 가 자동으로 읽히지
+   않고, 사용자가 매번 어제를 다시 설명하게 된다. 설치 안내 한 줄:
+   `claude-skills` 저장소에서 `./setup.sh` (Windows `.\setup.ps1`). 이미 있으면 넘어간다.
+5. **결과 print/요약.** 만든 파일·폴더 목록 출력. "handoff로 이어서 기록, meeting-report/paper-report로 보고" 안내 한 줄.
 
 ## 원칙
 - **idempotent**: 기존 파일·폴더 절대 덮어쓰지 않음. 없는 것만 채움.

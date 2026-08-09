@@ -1,6 +1,6 @@
 ---
 name: grilling
-description: Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any 'grill' trigger phrases. Korean triggers: "그릴링", "갈궈봐", "나 좀 갈궈", "계획 물어봐", "하나씩 물어봐", "코딩 전에 물어봐", "합의부터 하자", "질문 공세", "따져봐", "설계부터 짚자".
+description: Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any 'grill' trigger phrases. Korean triggers — "그릴링", "갈궈봐", "나 좀 갈궈", "계획 물어봐", "하나씩 물어봐", "코딩 전에 물어봐", "합의부터 하자", "질문 공세", "따져봐", "설계부터 짚자".
 ---
 
 Interview me relentlessly about every aspect of this until we reach a shared understanding. Walk down each branch of the decision tree, resolving dependencies between decisions one-by-one. For each question, provide your recommended answer.

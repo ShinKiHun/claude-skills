@@ -1,6 +1,6 @@
 ---
 name: paper-report
-description: Turn user-supplied research paper PDFs (and our own result data) into a figure-rich, professor-facing Korean research-meeting report as a self-contained HTML plus PNG figures. Extracts the papers' own figures from the PDF, plots our calculation data, and renders concept diagrams in one unified visual system. Use when the user supplies paper PDFs and wants a 사전조사/미팅자료/보고자료, or asks to build a figure-rich survey report. Korean triggers: "논문 미팅자료", "논문 보고자료", "사전조사 자료 제작", "논문 figure 뽑아서 자료", "논문 정리해서 보고자료".
+description: Turn user-supplied research paper PDFs (and our own result data) into a figure-rich, professor-facing Korean research-meeting report as a self-contained HTML plus PNG figures. Extracts the papers' own figures from the PDF, plots our calculation data, and renders concept diagrams in one unified visual system. Use when the user supplies paper PDFs and wants a 사전조사/미팅자료/보고자료, or asks to build a figure-rich survey report. Korean triggers — "논문 미팅자료", "논문 보고자료", "사전조사 자료 제작", "논문 figure 뽑아서 자료", "논문 정리해서 보고자료".
 ---
 
 # paper-report

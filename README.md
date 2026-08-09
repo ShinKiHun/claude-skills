@@ -135,6 +135,40 @@ Get-ChildItem "$HOME\.claude\skills" -Directory | ForEach-Object { "$($_.Name): 
 7·8번은 항상 켜져 있어야 의미가 있으므로 Skill로 빼지 않는다. 호출해야 켜지는 "항상 의심하라"는
 필요한 시점에 이미 늦는다.
 
+## 연속성 훅 (setup 이 자동 설치)
+
+**문제**: `handoff` Skill 은 "이어서"라고 **쳐야만** 어제 상태를 읽는다. 그냥 일 얘기부터
+시작하면 Claude 는 `STATUS.md` 존재조차 모르고, 사용자가 매번 어제를 다시 설명하게 된다.
+규칙으로는 못 고친다 — Claude 가 아니라 harness 가 실행하는 **hook** 이어야 한다.
+
+| 훅 | 스크립트 | 하는 일 |
+|---|---|---|
+| `SessionStart` | [hooks/inject-status.py](hooks/inject-status.py) | 새 창마다 `STATUS.md` · `dead-ends.md` · `decisions/` 인덱스 · `LOG.md` 최신 엔트리를 **컨텍스트에 자동 주입** |
+| `Stop` | [hooks/status-stale.py](hooks/status-stale.py) | `STATUS.md` 가 실제 작업 파일보다 6시간 이상 낡으면 한 줄 경고 |
+
+두 번째가 첫 번째를 지킨다. **낡은 STATUS 가 자동 주입되면 아무것도 없는 것보다 나쁘다** —
+Claude 가 틀린 어제를 자신 있게 말하게 된다. 그래서 낡음을 감지한다.
+
+`setup.sh` / `setup.ps1` 이 [hooks/install_hooks.py](hooks/install_hooks.py) 로 설치한다.
+설치기는 `~/.claude/settings.json` 을 **병합**한다 — 다른 도구(orca 등)의 훅이 같은 파일에
+있으므로 통째로 덮으면 전부 죽는다. 우리 항목만 식별해 교체하고, 백업을 남기고, 쓰기 전에
+JSON 을 되읽어 검증한다. 깨진 settings.json 은 아예 건드리지 않고 종료한다.
+
+```bash
+python hooks/install_hooks.py <repo> --dry-run     # 쓰지 않고 결과만
+python hooks/install_hooks.py <repo> --uninstall   # 우리 훅만 제거
+```
+
+연속성 파일이 없는 폴더에서는 두 훅 모두 **조용히 통과**하므로 전역 설치해도 무해하다.
+`python` 이 없으면 훅만 건너뛰고 Skill·전역 규칙 설치는 정상 진행된다. Windows 에서
+`python3` 는 Microsoft Store 의 App Execution Alias 로 잡힐 수 있어(실행하면 `Python` 만
+출력하고 실패) 설치기가 인터프리터를 **실제로 실행해 보고** 고른다.
+훅은 새 세션부터 적용된다 — 기존 창에는 반영되지 않는다.
+
+⚠️ `settings.json` 에는 **이 저장소 경로가 절대경로로** 박힌다. 저장소를 옮기거나 지우면
+훅은 조용히 아무것도 하지 않는다(`[ -f "$H" ]` 가드). 옮겼으면 새 경로에서 `./setup.sh`
+를 다시 실행하면 된다. 반대로 이 방식 덕분에 Linux 에서는 `git pull` 만으로 훅이 갱신된다.
+
 ## 설치
 
 ### 에이전트에게 맡기기
@@ -220,11 +254,15 @@ claude-skills/
 │  ├─ catalog.yaml           # 외부 Skill, MCP, 도구와 가이드의 색인
 │  ├─ design/                # 색상, 시각 시스템 등 재사용 가능한 디자인 레퍼런스
 │  └─ external/              # 원문을 복제하지 않은 출처·용도·검증 메모
+├─ hooks/
+│  ├─ inject-status.py        # SessionStart: 연속성 파일을 세션에 자동 주입
+│  ├─ status-stale.py         # Stop: STATUS.md 낡음 감지
+│  └─ install_hooks.py        # settings.json 에 병합 설치 (--uninstall / --dry-run)
 ├─ evals/                    # 실제 요청으로 Skill 동작을 확인하는 사례
 ├─ install.ps1
 ├─ install.sh
-├─ setup.ps1                 # install.ps1 -GlobalRules 래퍼 (새 기기 진입점)
-└─ setup.sh                  # install.sh --global-rules 래퍼 (새 기기 진입점)
+├─ setup.ps1                 # install.ps1 -GlobalRules + 훅 (새 기기 진입점)
+└─ setup.sh                  # install.sh --global-rules + 훅 (새 기기 진입점)
 ```
 
 ## Prompt, Resource, Skill의 차이

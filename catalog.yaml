@@ -18,6 +18,23 @@ global_rules:
     - "Adversarial review (rule 7): assume the project succeeding is against your interest; doubt and question the user's hypotheses instead of agreeing by default."
     - "Triple verification (rule 8): before reporting, verify along three different axes — run it, re-read the source, try to falsify. Repeating one check three times is banned."
 
+continuity_hooks:
+  path: "hooks/"
+  installs_to: "~/.claude/settings.json (merged, never overwritten)"
+  install_with: "./setup.sh   |   .\\setup.ps1   (runs hooks/install_hooks.py)"
+  uninstall_with: "python hooks/install_hooks.py <repo> --uninstall"
+  requires: "python3 or python on PATH; skipped with a warning otherwise"
+  hooks:
+    - event: "SessionStart"
+      script: "hooks/inject-status.py"
+      does: "Injects STATUS.md, dead-ends.md, the decisions/ index, and the latest LOG.md entry into every new session, so the user never re-explains yesterday. Silent no-op in folders without these files."
+    - event: "Stop"
+      script: "hooks/status-stale.py"
+      does: "Warns once when STATUS.md is 6+ hours older than the newest work file — a stale STATUS injected as fact is worse than none."
+  use_for:
+    - "The user says they keep having to re-explain yesterday's work to a new session."
+    - "Making handoff automatic instead of depending on the user typing 이어서/저장."
+
 prompt_library:
   catalog: "prompt-library/catalog.yaml"
   collection_count: 1
@@ -102,7 +119,7 @@ skills:
   - name: "handoff"
     path: "skills/handoff"
     status: "active"
-    purpose: "Session continuity: load yesterday's context on start, write handoff note on end, monthly archive + transcript prune. Works in any project folder with CLAUDE.md/LOG.md/STATUS.md."
+    purpose: "Session continuity split by lookup key: STATUS.md (now, overwritten), dead-ends.md (permanent failures, always read), decisions/ (one ADR file per decision, looked up by topic), LOG.md (time axis, newest entry only). Load on start, promote decisions and failures out of LOG on end, monthly archive that never discards dead ends. Pairs with continuity_hooks for automatic loading."
     triggers:
       - "이어서"
       - "어디까지 했지"
@@ -111,11 +128,12 @@ skills:
       - "오늘 정리"
       - "월간 정리"
       - "resume / hand off session"
+      - "The user complains about re-explaining yesterday to each new session."
 
   - name: "project-init"
     path: "skills/project-init"
     status: "active"
-    purpose: "One-shot scaffold a new project/research folder: lean CLAUDE.md, STATUS.md, LOG.md (handoff-compatible), and ref/code/analysis/reports skeleton. Field-agnostic; relies on global ~/.claude/CLAUDE.md for the always-on universal rules."
+    purpose: "One-shot scaffold a new project/research folder: lean CLAUDE.md, STATUS.md, LOG.md, dead-ends.md, decisions/, and the ref/code/analysis/reports skeleton (handoff-compatible). Field-agnostic; relies on global ~/.claude/CLAUDE.md for the always-on universal rules."
     triggers:
       - "프로젝트 세팅"
       - "폴더 세팅"
