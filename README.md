@@ -55,7 +55,7 @@ Claude Code와 Codex에서 함께 사용하는 개인 연구 Skill, prompt libra
 | [review-animations](skills/review-animations/) | active | 애니메이션·모션 코드를 엄격한 기준으로 리뷰할 때 (명시 호출 전용) | “애니메이션 리뷰해줘”, `/review-animations` |
 | [improve-animations](skills/improve-animations/) | active | 코드베이스 전체 모션을 감사해 우선순위 개선 계획이 필요할 때 (소스는 수정 안 함) | “애니메이션 개선해줘”, “앱 느낌 좋게” |
 | [animation-vocabulary](skills/animation-vocabulary/) | active | 모션 효과의 정확한 명칭을 찾아 프롬프트에 쓰고 싶을 때 | “이거 뭐라고 불러?”, “이 효과 이름이 뭐야” |
-| [pubfig](skills/pubfig/) | active | 결과 그림을 연구실 논문 규격(네모칸 축·볼드 라벨·격자 없음·300 dpi)으로 그릴 때 | “논문 스타일 그림”, “박사님 스타일로” |
+| [pubfig](skills/pubfig/) | active | 결과 그림을 정해진 룩으로 그릴 때 — plain(Catbench parity: 기본 rc+Arial 14/12/10, 300 dpi) / lab(drmstyle: 네모칸·볼드·격자 없음) | “논문 스타일 그림”, “박사님 스타일로”, “parity plot 스타일” |
 | [humanizer](skills/humanizer/) | active | 글을 사람이 쓴 것처럼 다듬어 AI 티를 뺄 때 | “휴먼틱하게”, “AI 티 빼줘”, “자연스럽게 다듬어” |
 
 기계가 읽을 수 있는 전체 목록과 경로는 [catalog.yaml](catalog.yaml)에 있다.

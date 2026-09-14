@@ -73,10 +73,10 @@ skills:
   - name: "pubfig"
     path: "skills/pubfig"
     status: "active"
-    purpose: "Publication-style matplotlib figures in the lab's fixed convention (framed axes, bold labels, no grid, 300 dpi) via scripts/pubstyle.py."
+    purpose: "Publication-style matplotlib figures via scripts/pubstyle.py: preset plain (Catbench parity look: defaults + Arial 14/12/10, 300 dpi) or lab (drmstyle: framed axes, bold labels, no grid)."
     triggers:
       - "The user wants a result plot in the usual lab / paper look."
-      - "Korean: 논문 스타일 그림, 박사님 스타일로, 그림 규격 맞춰, pubfig."
+      - "Korean: 논문 스타일 그림, 박사님 스타일로, 석현 선배 스타일, parity plot 스타일, 그림 규격 맞춰, pubfig."
   - name: "expand-task-brief"
     path: "skills/expand-task-brief"
     status: "active"
