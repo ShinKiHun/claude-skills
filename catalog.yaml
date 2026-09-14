@@ -70,6 +70,13 @@ routing:
       - "내 GitHub에서 필요한 스킬 받아서 적용해"
 
 skills:
+  - name: "pubfig"
+    path: "skills/pubfig"
+    status: "active"
+    purpose: "Publication-style matplotlib figures in the lab's fixed convention (framed axes, bold labels, no grid, 300 dpi) via scripts/pubstyle.py."
+    triggers:
+      - "The user wants a result plot in the usual lab / paper look."
+      - "Korean: 논문 스타일 그림, 박사님 스타일로, 그림 규격 맞춰, pubfig."
   - name: "expand-task-brief"
     path: "skills/expand-task-brief"
     status: "active"
