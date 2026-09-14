@@ -65,6 +65,8 @@ The report must contain:
 - restrained warning and failure notes that are visually distinct
 - compact numeric tables with right-aligned values
 - print CSS that hides navigation and creates clean section page breaks
+- a lightbox: every figure `<img>` carries `class="zoom"` and clicking it opens the image
+  full-screen with its caption (`#lb` overlay, Esc or click-outside to close) — the builder has it
 
 ## Figures
 

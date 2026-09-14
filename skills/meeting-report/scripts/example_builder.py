@@ -85,6 +85,20 @@ footer{max-width:1060px;margin:0 auto;padding:34px 32px 70px;color:var(--faint);
 text-align:center;border-top:1px solid var(--line2)}
 footer code{background:var(--line2);padding:2px 7px;border-radius:5px;color:var(--sub)}
 @media(max-width:660px){.hero h1{font-size:28px}.bar nav{display:none}main{padding-top:40px}}
+/* 라이트박스 — figure 클릭 시 확대. paper-report 와 동일 구현 */
+img.zoom{cursor:zoom-in;transition:filter .15s}
+figure:hover img.zoom{filter:brightness(.97)}
+/* 라이트박스: figure 클릭 시 확대 */
+#lb{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;
+background:rgba(15,20,28,.86);backdrop-filter:blur(3px);cursor:zoom-out;padding:24px}
+#lb.on{display:flex}
+#lb img{max-width:96vw;max-height:92vh;width:auto;height:auto;border-radius:8px;
+box-shadow:none;background:#fff;cursor:default}
+#lb .x{position:fixed;top:16px;right:24px;color:#fff;font-size:30px;font-weight:700;
+cursor:pointer;line-height:1;opacity:.85;font-family:system-ui,sans-serif}
+#lb .x:hover{opacity:1}
+#lb .cap{position:fixed;bottom:16px;left:0;right:0;text-align:center;color:#E5E9ED;
+font-size:13px;padding:0 24px}
 @media print{.bar,.prog{display:none}main{padding-top:0}body{background:#fff}
 .hero{background:var(--fieldA);margin:0}main>section{break-before:page;padding-top:6px}
 figure,table.s{break-inside:avoid}h2,.take,.kick{break-after:avoid}}
@@ -92,7 +106,9 @@ figure,table.s{break-inside:avoid}h2,.take,.kick{break-after:avoid}}
 
 SCRIPT = ("const p=document.getElementById('prog');"
           "addEventListener('scroll',()=>{const h=document.documentElement;"
-          "p.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';});")
+          "p.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';});"
+          # 라이트박스: img.zoom 클릭 → 확대, Esc·바깥 클릭 → 닫힘
+          "const lb=document.getElementById('lb'),li=document.getElementById('lbimg'),lc=document.getElementById('lbcap');function closeLb(){lb.classList.remove('on');}document.querySelectorAll('img.zoom').forEach(im=>{im.addEventListener('click',()=>{li.src=im.src;const f=im.closest('figure'),c=f&&f.querySelector('figcaption');lc.textContent=c?c.textContent:'';lb.classList.add('on');});});lb.addEventListener('click',e=>{if(e.target!==li)closeLb();});addEventListener('keydown',e=>{if(e.key==='Escape')closeLb();});")
 
 HTML = f"""<!doctype html>
 <html lang="ko"><head><meta charset="utf-8">
@@ -130,7 +146,7 @@ A4500 직렬 무사고 · SLURM: BH blind 8시스템 진행 중</div>
 <h2><span class="num">1</span>BH 직접탐색 vs 제시 — NiPdPt 55 첫 완결 판정</h2>
 <div class="take">제시(~15분)가 BH replica 평균(seed당 ~25시간)과 동급. BH가 찾은 정답 모티프(icosahedron)를 우리도 제시함</div>
 <div class="duo">
-<figure><img src="{IMG['ih']}" alt="NiPdPt ih proposal structure">
+<figure><img class="zoom" src="{IMG['ih']}" alt="NiPdPt ih proposal structure">
 <figcaption>우리 제시 best 구조 (ih skeleton, −266.404 eV) — BH 상위 2개 seed가 찾은 것과 동일한 Mackay icosahedron 모티프</figcaption></figure>
 <div>
 <table class="s">
@@ -151,7 +167,7 @@ A4500 직렬 무사고 · SLURM: BH blind 8시스템 진행 중</div>
 <div class="kick">Zero-cost harvest</div>
 <h2><span class="num">2</span>QCD 데이터셋 회수 — 신규 계산 0으로 4건</h2>
 <div class="take">과거 벤치마킹 자산에 UMA 계산이 전량 완료되어 있었음 — join만으로 검증·물성·라이브러리 확보</div>
-<figure><img src="{IMG['flow']}" alt="QCD harvest flow">
+<figure><img class="zoom" src="{IMG['flow']}" alt="QCD harvest flow">
 <figcaption>QCD 자산 → 4개 추출물 → 검증 스택과 제시 엔진으로 흘러가는 구조. 전 과정 신규 계산 ≈ 0</figcaption></figure>
 <table class="s">
 <tr><th>추출물</th><th>핵심 수치</th><th>용도</th></tr>
@@ -166,7 +182,7 @@ A4500 직렬 무사고 · SLURM: BH blind 8시스템 진행 중</div>
 <div class="kick">Mark 5 · geometry axis</div>
 <h2><span class="num">3</span>Multi-skeleton 제시 — 5/5 시스템 신기록</h2>
 <div class="take">QCD skeleton + skeleton별 binary decoration 543 SP(2분) 재학습 = 임의 모양 위 ordering 제시. 전 시스템에서 fcc 제시를 경신</div>
-<figure><img src="{IMG['geom']}" alt="geometry axis + ensemble + BH">
+<figure><img class="zoom" src="{IMG['geom']}" alt="geometry axis + ensemble + BH">
 <figcaption>좌: skeleton별 제시 E − fcc 제시 (5/5 ih 승, 최대 IrPdPtRh −1.84 eV) ·
 중: Boltzmann 모티프 점유 @800 K — ih 우세 83–100%, fcc/anti-Mackay 소수 공존 (ensemble 제시) ·
 우: NiPdPt BH 대비 (1/100 비용)</figcaption></figure>
@@ -182,7 +198,7 @@ A4500 직렬 무사고 · SLURM: BH blind 8시스템 진행 중</div>
 <h2><span class="num">4</span>Supported 확장 파일럿 — 4/4 성공 + 모양 선호 재편 발견</h2>
 <div class="take">Al₂O₃ 위에서는 gas의 ih 선호가 fcc로 뒤집힘 (+0.55 eV) — 약결합 graphene은 ih 유지. support 대조쌍 시나리오 그대로</div>
 <div class="duo">
-<figure><img src="{IMG['al']}" alt="NiPdPt on Al2O3">
+<figure><img class="zoom" src="{IMG['al']}" alt="NiPdPt on Al2O3">
 <figcaption>Al₂O₃ 위 제시 best (fcc skeleton, −2413.844 eV). 계면에 Pd/Pt 농축, Ni는 계면 회피 (예비 통계)</figcaption></figure>
 <div>
 <table class="s">
@@ -201,7 +217,7 @@ A4500 직렬 무사고 · SLURM: BH blind 8시스템 진행 중</div>
 <div class="kick">Literature cross-check</div>
 <h2><span class="num">5</span>Ruban 1999 전수 대조 — 표면 서열 4중 정합</h2>
 <div class="take">8원소 28쌍 중 26쌍 일치, 정면 불일치 0 — 반직관 Cu–Pt 케이스까지 적중</div>
-<figure><img src="{IMG['ruban']}" alt="Ruban comparison matrix">
+<figure><img class="zoom" src="{IMG['ruban']}" alt="Ruban comparison matrix">
 <figcaption>Ruban 1999 DFT 세그리게이션 에너지 (빨강 = 표면행). 우리 서열과 부호가 어긋나는 셀은 적색 테두리 —
 단 2셀, 둘 다 |E| ≤ 0.12 eV near-degenerate (Ruban 스스로 "세그리게이션 없음" 영역)</figcaption></figure>
 <ul class="p">
@@ -226,6 +242,7 @@ A4500 직렬 무사고 · SLURM: BH blind 8시스템 진행 중</div>
 </section>
 
 </main>
+<div id="lb"><span class="x">&times;</span><img id="lbimg" alt=""><div class="cap" id="lbcap"></div></div>
 <footer>NDU · MLIP 기반 nanocluster 구조 제시 · Generated 2026-07-04 00:20 (7/3 세션분) ·
 <code>reports/20260703_20260709/20260703.html</code> · meeting-report skill</footer>
 <script>{SCRIPT}</script>
