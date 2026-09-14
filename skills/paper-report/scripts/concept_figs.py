@@ -47,10 +47,10 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mp
 import numpy as np
 
-INK, INK2, MUTED, GRID, SURF = "#1B2733", "#33414F", "#6B7682", "#E5E9ED", "#FFFFFF"
-TEAL, OCHRE, CLAY, BLUE = "#2E6F77", "#B5872E", "#B0564C", "#3F6E9A"
+INK, INK2, MUTED, GRID, SURF = "#1B2730", "#3A4650", "#6A737B", "#E4E3E1", "#FFFFFF"
+TEAL, OCHRE, CLAY, BLUE = "#41525E", "#8A6A1E", "#B02A20", "#7A8B96"
 NAMED = {"teal": TEAL, "ochre": OCHRE, "clay": CLAY, "blue": BLUE, "ink": INK, "muted": MUTED}
-FILL = {"teal": "#F2F7F7", "ochre": "#FBF7EE", "clay": "#FBF1EF", "blue": "#F1F5FA", "muted": "#FBFBFA"}
+FILL = {"teal": "#E7EAED", "ochre": "#FAF4E6", "clay": "#F2E8E7", "blue": "#E7EAED", "muted": "#FAFAFA"}
 
 # 한글 = Malgun 우선(NanumSquare mpl space 버그 회피) + NanumSquare 등록
 _FONT_STACK = _fonts.register_mpl()
@@ -83,7 +83,7 @@ def make_flow(spec):
     for n in nodes:
         idx[n["id"]] = n
         col = n.get("color", "teal")
-        ec, fc = _color(col), FILL.get(col, "#FBFBFA")
+        ec, fc = _color(col), FILL.get(col, "#FAFAFA")
         ax.add_patch(mp.FancyBboxPatch((n["x"], n["y"]), n["w"], n["h"],
                                        boxstyle="round,pad=1.2", fc=fc, ec=ec, lw=1.6))
         cx, cy = n["x"] + n["w"] / 2, n["y"] + n["h"] / 2

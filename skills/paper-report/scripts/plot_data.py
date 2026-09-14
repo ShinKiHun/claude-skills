@@ -40,9 +40,9 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 # ── 리포트 CSS와 동일 팔레트 (example_builder.py :root 토큰과 일치) ──
-INK, INK2, MUTED, GRID, SURF = "#1B2733", "#33414F", "#6B7682", "#E5E9ED", "#FFFFFF"
-TEAL, OCHRE, CLAY, BLUE = "#2E6F77", "#B5872E", "#B0564C", "#3F6E9A"
-CYCLE = [TEAL, CLAY, BLUE, OCHRE, "#6A8D3F", "#7A5C9E"]
+INK, INK2, MUTED, GRID, SURF = "#1B2730", "#3A4650", "#6A737B", "#E4E3E1", "#FFFFFF"
+TEAL, OCHRE, CLAY, BLUE = "#41525E", "#8A6A1E", "#B02A20", "#7A8B96"
+CYCLE = [TEAL, CLAY, BLUE, OCHRE, "#5E2A26", "#2B3A45"]
 
 # 한글 = Malgun 우선(NanumSquare mpl space 버그 회피) + NanumSquare 등록. 그림에도 한글 OK.
 _FONT_STACK = _fonts.register_mpl()

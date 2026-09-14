@@ -8,8 +8,8 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mp
 import numpy as np
 
-INK, INK2, MUTED, GRID, SURF = "#1B2733", "#33414F", "#6B7682", "#E5E9ED", "#FFFFFF"
-TEAL, OCHRE, CLAY, BLUE = "#2E6F77", "#B5872E", "#B0564C", "#3F6E9A"
+INK, INK2, MUTED, GRID, SURF = "#1B2730", "#3A4650", "#6A737B", "#E4E3E1", "#FFFFFF"
+TEAL, OCHRE, CLAY, BLUE = "#41525E", "#8A6A1E", "#B02A20", "#7A8B96"
 plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 10,
                      "axes.unicode_minus": False,
                      "figure.facecolor": SURF, "axes.facecolor": SURF, "text.color": INK})
@@ -31,7 +31,7 @@ def arrow(x1, y1, x2, y2, c=MUTED):
     ax.annotate("", xy=(x2, y2), xytext=(x1, y1),
                 arrowprops=dict(arrowstyle="-|>", color=c, lw=1.7))
 
-box(2, 30, 23, 46, "QCD dataset", "DFT full-relax\n62,880\n(55 elem, size 3-55)\n+ UMA SP\n1,520,614", "#F2F7F7", TEAL, TEAL)
+box(2, 30, 23, 46, "QCD dataset", "DFT full-relax\n62,880\n(55 elem, size 3-55)\n+ UMA SP\n1,520,614", "#E7EAED", TEAL, TEAL)
 ax.text(13.5, 22, "new compute ~ 0\n(join / fit only)", ha="center", va="top",
         fontsize=9.5, color=CLAY, fontweight="bold")
 
@@ -41,11 +41,11 @@ labels = [("isomer anchor", "UMA-DFT tau 0.772\nsize55 argmin 6/8", BLUE),
           ("motif map (55 elem)", "14 ih-formers\nAu/Pt amorph = literature", OCHRE),
           ("skeleton library", "ih / anti-Mackay /\nlow-sym candidates", OCHRE)]
 for y, (t, sb, c) in zip(ys, labels):
-    box(35, y, 30, 24, t, sb, "#FBFBFA", c)
+    box(35, y, 30, 24, t, sb, "#FAFAFA", c)
     arrow(25.5, 53, 35, y + 12)
 
-box(76, 56, 22, 32, "validation\nstack", "UMA trust for\nskeleton pick\n+ Ruban / Kristoffersen", "#FBF7EE", OCHRE)
-box(76, 10, 22, 32, "proposal engine\nMark 5", "multi-skeleton\n5/5 new records\n(+ supported pilot)", "#F2F7F7", TEAL, TEAL)
+box(76, 56, 22, 32, "validation\nstack", "UMA trust for\nskeleton pick\n+ Ruban / Kristoffersen", "#FAF4E6", OCHRE)
+box(76, 10, 22, 32, "proposal engine\nMark 5", "multi-skeleton\n5/5 new records\n(+ supported pilot)", "#E7EAED", TEAL, TEAL)
 arrow(65, 91, 76, 78); arrow(65, 65, 76, 71)
 arrow(65, 39, 76, 32); arrow(65, 13, 76, 24)
 fig.savefig("/tmp/claude-1051/-DATA-user-scratch-khshin-NDU/c4ac04c8-57cb-4a1e-a937-280069f1f4c6/scratchpad/fig_qcd_flow.png",
@@ -76,7 +76,7 @@ im = ax.imshow(mat, cmap="RdBu", vmin=-1.2, vmax=1.2)
 for i, h in enumerate(E):
     for j, s in enumerate(E):
         if h == s:
-            ax.add_patch(mp.Rectangle((j-.5, i-.5), 1, 1, fc="#EFF2F5", ec="none"))
+            ax.add_patch(mp.Rectangle((j-.5, i-.5), 1, 1, fc="#EDECEA", ec="none"))
             continue
         v = M[h][s]
         ax.text(j, i, f"{v:+.2f}".replace("+0.00", "0.00").replace("-0.00","0.00"),
