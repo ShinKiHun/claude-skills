@@ -249,5 +249,5 @@ A4500 직렬 무사고 · SLURM: BH blind 8시스템 진행 중</div>
 </body></html>
 """
 
-OUT.write_text(HTML)
+OUT.write_text(HTML, encoding="utf-8")  # cp949 기본값(Windows)에서 em dash 로 죽는다
 print("saved:", OUT, f"({len(HTML)//1024} KB)")
