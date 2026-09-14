@@ -3,7 +3,7 @@
 
     preset="plain"  (기본)  Catbench/석현 선배 parity plot 룩.
                             matplotlib 기본 rc + Arial + 제목 14 / 축라벨 12 / 눈금 10 + 300 dpi.
-                            얇은 4면 테두리(0.8), 눈금 바깥, 격자 없음, 기본 색 순환(tab10).
+                            얇은 4면 테두리(0.8), 눈금 바깥, 격자 없음, 계열색 = inferno 에서 추출(진보라/적주황/노랑).
                             원본: /home/jovyan/1_Seokhyun/0_utility/ 의 Arial 등록 블록 + plot_parity_from_csv.
     preset="lab"            DRM drmstyle.py(2026-08-12 확정) 룩. 4면 테두리 1.6·볼드 라벨·눈금 없음·
                             검은 외곽선·lab 팔레트(navy/magenta/teal/amber…). 발표·인쇄용으로 더 무겁다.
@@ -29,7 +29,8 @@ lab 규약
       칠한 요소 검은 외곽선 0.9, minor tick 없음, 범례 테두리, Arial, 300 dpi
 
 팔레트
-    C / ORDER : lab 4색 + 보조 3색 (drmstyle 값).  cycle() 은 plain 이면 tab10, lab 이면 ORDER.
+    C / ORDER : lab 4색 + 보조 3색 (drmstyle 값).  cycle() 은 plain 이면 inferno_cycle(4), lab 이면 ORDER.
+    inferno_cycle(n) : 범주 n개를 inferno 에서 등간격 추출.  MARKER_KW : ms=7, alpha=0.85 (scatter s=50 느낌).
     MARKERS   : 색과 함께 마커도 다르게 — 흑백 인쇄 대비.
 """
 import matplotlib
@@ -212,10 +213,22 @@ def save(fig, path, dpi=300):
 
 
 def cycle(keys=None):
-    """색 순환 리스트. plain 프리셋이면 matplotlib 기본(tab10), lab 이면 ORDER."""
+    """색 순환 리스트. plain 프리셋이면 inferno 에서 뽑은 색(parity plot 색감), lab 이면 ORDER."""
     if keys is None and PRESET == "plain":
-        return list(TAB10)
+        return inferno_cycle(4)
     return [C[k] for k in (keys or ORDER)]
+
+
+def inferno_cycle(n=3, lo=0.12, hi=0.82, cmap_name="inferno"):
+    """범주형 계열 n개를 inferno(기본) 컬러맵에서 등간격으로 뽑는다 — parity plot 컬러바와 같은 색감.
+    lo/hi 로 양끝(검정·연노랑) 을 잘라 흰 배경에서 읽히게 한다.  n=3: 진보라 / 적주황 / 노랑."""
+    import matplotlib.colors as mc
+    import numpy as np
+    cm = plt.get_cmap(cmap_name)
+    return [mc.to_hex(cm(v)) for v in np.linspace(lo, hi, n)]
+
+
+MARKER_KW = dict(ms=7, alpha=0.85, mec="none")   # parity plot 의 s=50, alpha=0.8 에 해당하는 line-plot 마커 설정
 
 
 def cmap(color, light="#fdfdfb", dark=0.55, n=256):
@@ -242,7 +255,7 @@ if __name__ == "__main__":
         fig, axs = plt.subplots(1, 2, figsize=(9.5, 3.8))
         x = np.linspace(0, 10, 60); cols = cycle()
         for i in range(3):
-            axs[0].plot(x, np.sin(x + i), color=cols[i], marker=MARKERS[i], markevery=12, label="series %d" % i)
+            axs[0].plot(x, np.sin(x + i), color=cols[i], marker=MARKERS[i], markevery=12, label="series %d" % i, **(MARKER_KW if preset == "plain" else {}))
         axs[0].set_xlabel("x label"); axs[0].set_ylabel("y label"); axs[0].set_title("line"); axs[0].legend()
         rng = np.random.default_rng(0); a = rng.normal(2, 0.6, 80); b = a + rng.normal(0, 0.08, 80)
         sc = axs[1].scatter(a, b, c=rng.integers(2, 55, 80), cmap="inferno", s=50, alpha=0.8)

@@ -10,7 +10,7 @@ description: Publication-style matplotlib figures with the lab's two fixed looks
 ## 프리셋
 | preset | 출처 | 모양 |
 |---|---|---|
-| `plain` (기본) | Catbench parity plot (석현 선배 `0_utility` Arial 블록 + `plot_parity_from_csv`) | matplotlib 기본 rc + **Arial**, 제목 14 / 축라벨 12 / 눈금·범례 10, 얇은 4면 테두리, 눈금 바깥, 격자 없음, 색 tab10, 연속값 `inferno`, 300 dpi |
+| `plain` (기본) | Catbench parity plot (석현 선배 `0_utility` Arial 블록 + `plot_parity_from_csv`) | matplotlib 기본 rc + **Arial**, 제목 14 / 축라벨 12 / 눈금·범례 10, 얇은 4면 테두리, 눈금 바깥, 격자 없음, **계열색 = inferno 추출**(`ps.cycle()` / `ps.inferno_cycle(n)`: 진보라·적주황·노랑), 마커 `ps.MARKER_KW`(ms 7, alpha 0.85), 연속값 `inferno` 컬러바, 기준선 `k--`, 300 dpi |
 | `lab` | DRM `drmstyle.py` (2026-08-12 확정) | 4면 테두리 1.6 pt, **볼드** 라벨·제목, 눈금 안쪽(`"none"`/`"lb"`/`"all"`), 격자 없음, 칠한 요소 검은 외곽선, lab 팔레트 navy/magenta/teal/amber, 300 dpi |
 
 ## 쓰는 법
@@ -21,8 +21,8 @@ import pubstyle as ps
 ps.use()                                    # plain.  lab 룩: ps.use(preset="lab")
 
 fig, ax = plt.subplots(figsize=(5, 4))
-cols = ps.cycle()                           # plain: tab10 / lab: 팔레트
-ax.plot(x, y, color=cols[0], marker=ps.MARKERS[0], label="DFT")
+cols = ps.cycle()                           # plain: inferno 추출색 / lab: 팔레트
+ax.plot(x, y, color=cols[0], marker=ps.MARKERS[0], label="DFT", **ps.MARKER_KW)
 ax.set_xlabel("Volume (Å$^3$/atom)"); ax.set_ylabel("Energy (eV/atom)"); ax.legend()
 ps.save(fig, "fig.png")                     # 300 dpi, bbox tight (lab 이면 frame() 자동)
 ```
