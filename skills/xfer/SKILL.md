@@ -83,3 +83,12 @@ scp -P <PORT> -r <LOCAL_SRC> <OTHER_ID>@<HOST>:~/
 - **실행 중인 SLURM 잡 폴더를 복사하면 중간 스냅샷**(OUTCAR/WAVECAR 불일치). 최종 결과 백업이면 잡 종료 후 전송.
 - 목적지 상위 폴더가 없으면 scp 가 source 를 그 이름으로 rename 복사하는 사고 → push 는 항상 `mkdir -p` 먼저.
 - `WAVECAR/CHGCAR/CHG/REPORT` 가 `100% 0` 으로 떠도 정상 (원본이 `LWAVE/LCHARG=.FALSE.` 면 0바이트).
+
+---
+
+## 고칠 때 — `CHANGELOG.md` 에 날짜별로 남긴다
+
+이 스킬은 여러 Claude 세션이 각자 프로젝트에서 돌아가며 고친다.
+**바꾸기 전에 `CHANGELOG.md` 를 먼저 읽어라** — 왜 지금 모양인지, 이미 시도했다 되돌린 게
+뭔지 거기 있다. **고쳤으면 맨 위에 항목을 추가하고 커밋해라**
+(날짜 / 프로젝트 폴더명·모델명 / 무엇·왜·검증). 형식은 그 파일 머리말에 있다.

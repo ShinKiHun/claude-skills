@@ -74,3 +74,12 @@ description: Turn user-supplied research paper PDFs (and our own result data) in
 - 자체완결(원격 스크립트·폰트·이미지 금지).
 - 논문 figure는 출처 표기(`credit`: "Fig. N of DOI:…").
 - 관측 / 해석 / 가정 / 예정 구분. 부정적 결과도 정직히.
+
+---
+
+## 고칠 때 — `CHANGELOG.md` 에 날짜별로 남긴다
+
+이 스킬은 여러 Claude 세션이 각자 프로젝트에서 돌아가며 고친다.
+**바꾸기 전에 `CHANGELOG.md` 를 먼저 읽어라** — 왜 지금 모양인지, 이미 시도했다 되돌린 게
+뭔지 거기 있다. **고쳤으면 맨 위에 항목을 추가하고 커밋해라**
+(날짜 / 프로젝트 폴더명·모델명 / 무엇·왜·검증). 형식은 그 파일 머리말에 있다.

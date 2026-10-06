@@ -50,3 +50,12 @@ description: One-shot scaffolding for a new project/research folder. Run once in
 - **얇게**: CLAUDE.md에 전역규칙 복붙 금지(항상 로드되는 전역과 중복 = 컨텍스트 낭비). 프로젝트 고유만.
 - 폴더 골격은 표준(ref/code/analysis/reports). 프로젝트가 코드 없으면 code/ 생략 등 상황에 맞게 조정 가능(유저가 원하면).
 - 전역규칙(`~/.claude/CLAUDE.md`)이 설치돼 있어야 범용 규칙이 적용됨. 없으면 유저에게 "전역규칙 설치할까요?"(claude-skills `--global-rules`) 안내.
+
+---
+
+## 고칠 때 — `CHANGELOG.md` 에 날짜별로 남긴다
+
+이 스킬은 여러 Claude 세션이 각자 프로젝트에서 돌아가며 고친다.
+**바꾸기 전에 `CHANGELOG.md` 를 먼저 읽어라** — 왜 지금 모양인지, 이미 시도했다 되돌린 게
+뭔지 거기 있다. **고쳤으면 맨 위에 항목을 추가하고 커밋해라**
+(날짜 / 프로젝트 폴더명·모델명 / 무엇·왜·검증). 형식은 그 파일 머리말에 있다.

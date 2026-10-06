@@ -107,6 +107,50 @@ def value_barh(ax, names, values, fig=None, label="", unit="", title=None, cmap=
     return names, values
 
 
+def parity(ax, ref, pred, c=None, fig=None, cbar_label="Number of atoms",
+           s=50, alpha=0.8, cmap=CMAP, margin=0.1, unit="eV/atom",
+           what=None, band=False):
+    """parity plot — 참고 노트북(choung_style_code) 을 그대로 옮긴 것.
+
+    원본:  plt.figure(figsize=(5,4))
+           plt.scatter(ref, pred, c=atom_counts, cmap='inferno', s=50, alpha=0.8)
+           plt.plot([lo-m, hi+m], [lo-m, hi+m], 'k--')      m = 범위의 10%
+           plt.title(f'{element} Formation Energy 
+(MAE = {mae:.3f} {unit})')
+           plt.colorbar(scatter, label='Number of atoms')
+
+    what  : 주면 제목을 "<what>
+(MAE = x.xxx unit)" 로 단다
+    band  : True 면 +-MAE 띠를 옅게 깐다 (오차 크기를 숫자 안 읽고 보이게)
+    반환  : (scatter, cbar, mae, rmse)
+    """
+    ref = np.asarray(ref, float)
+    pred = np.asarray(pred, float)
+    mae = float(np.mean(np.abs(pred - ref)))
+    rmse = float(np.sqrt(np.mean((pred - ref) ** 2)))
+
+    lo = min(ref.min(), pred.min())
+    hi = max(ref.max(), pred.max())
+    m = (hi - lo) * margin
+    if band:
+        ax.fill_between([lo - m, hi + m], [lo - m - mae, hi + m - mae],
+                        [lo - m + mae, hi + m + mae],
+                        color="0.5", alpha=0.12, lw=0, zorder=0)
+    ax.plot([lo - m, hi + m], [lo - m, hi + m], "k--", zorder=1)
+    sc = ax.scatter(ref, pred, c=(ref if c is None else c), cmap=cmap,
+                    s=s, alpha=alpha, zorder=3)
+    ax.set_xlim(lo - m, hi + m)
+    ax.set_ylim(lo - m, hi + m)
+    cb = None
+    if cbar_label is not None:
+        cb = (fig or ax.figure).colorbar(sc, ax=ax, label=cbar_label)
+        if ps is not None:
+            ps.cbar_frame(cb)
+    if what is not None:
+        metric_title(ax, what, "MAE = %.3f %s" % (mae, unit))
+    return sc, cb, mae, rmse
+
+
 if __name__ == "__main__":
     import os
     import sys

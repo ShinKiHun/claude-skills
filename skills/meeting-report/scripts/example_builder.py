@@ -32,7 +32,7 @@ line-height:1.62;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow
 .bar{position:fixed;top:0;left:0;right:0;height:56px;z-index:60;display:flex;align-items:center;
 gap:24px;padding:0 32px;background:rgba(250,251,252,.86);backdrop-filter:saturate(160%) blur(10px);
 border-bottom:1px solid var(--hair);}
-.bar .b{font-weight:800;font-size:15px;letter-spacing:-.3px}
+.bar .b{font-weight:800;font-size:15px}
 .bar .b i{font-style:normal;color:var(--acc)}
 .bar nav{display:flex;gap:18px;font-size:13px;flex-wrap:wrap}
 .bar nav a{color:var(--sub);text-decoration:none;padding:2px 0;border-bottom:2px solid transparent;transition:.15s}
@@ -55,7 +55,7 @@ background:var(--fieldA);color:var(--inkA);overflow:hidden}
 section{padding:50px 0}
 section+section{border-top:1px solid var(--line2)}
 .kick{font-size:12px;font-weight:800;letter-spacing:2px;color:var(--acc);text-transform:uppercase}
-h2{margin-top:10px;font-size:26px;font-weight:800;letter-spacing:-.5px;display:flex;align-items:center;gap:14px}
+h2{margin-top:10px;font-size:26px;font-weight:800;letter-spacing:-.5px;line-height:1.3;display:flex;align-items:center;gap:14px}
 .num{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;flex:0 0 auto;
 border-radius:3px;background:var(--acc);color:#fff;font-size:15px;font-weight:800;box-shadow:none}
 .take{background:var(--fieldA);color:var(--inkA);padding:16px 20px;border-radius:2px;font-weight:600;font-size:16px;line-height:1.6;margin:14px 0 22px}
