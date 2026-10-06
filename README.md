@@ -71,6 +71,8 @@ Claude Code와 Codex에서 함께 사용하는 개인 연구 Skill, prompt libra
 **수정 없이 그대로 벤더링**한 것이다. 위키백과의 "Signs of AI writing" 패턴으로 글에서
 AI가 쓴 티를 제거해 사람이 쓴 것처럼 다듬는다.
 
+`humanize-korean`은 [epoko77-ai/im-not-ai](https://github.com/epoko77-ai/im-not-ai) (MIT, © 2026 epoko77-ai) v2.3.2 를 그대로 가져온 것이다. 원문 라이선스를 `skills/humanize-korean/LICENSE` 에 남겼다.
+
 ## 전역 규칙 (선택 설치)
 
 [global/user-CLAUDE.md](global/user-CLAUDE.md)를 `~/.claude/CLAUDE.md`로 연결하면 **모든 폴더의
