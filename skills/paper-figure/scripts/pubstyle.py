@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """pubstyle - 논문(publication)용 matplotlib 그림 규격. 프로젝트 무관. 프리셋 2개.
 
-    preset="plain"  (기본)  Catbench/석현 선배 parity plot 룩.
+    preset="plain"  (기본)  Catbench parity plot 룩.
                             matplotlib 기본 rc + Arial + 제목 14 / 축라벨 12 / 눈금 10 + 300 dpi.
                             얇은 4면 테두리(0.8), 눈금 바깥, 격자 없음, 계열색 = inferno 에서 추출(진보라/적주황/노랑).
                             원본: /home/jovyan/1_Seokhyun/0_utility/ 의 Arial 등록 블록 + plot_parity_from_csv.
@@ -60,7 +60,7 @@ PRESET = "plain"
 
 
 def _register_font(font_path):
-    """서버에 Arial 이 없을 때 ttf 를 직접 등록 (석현 선배 블록과 동일)."""
+    """서버에 Arial 이 없을 때 ttf 를 직접 등록 (참고 코드와 동일)."""
     if not font_path:
         return
     from matplotlib import font_manager as fm

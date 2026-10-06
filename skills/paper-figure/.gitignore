@@ -1,0 +1,4 @@
+_*selftest*.png
+__pycache__/
+*.pyc
+*.bak
