@@ -54,6 +54,12 @@ rp.metric_title(ax, "Equation of State", "$a_0$ = 4.0000 $\AA$, $B_0$ = 150.0 GP
 ```
 자가 점검: `python scripts/recipes.py` → `_recipes_selftest.png` (3패널 한 장)
 
+## 고칠 때 — CHANGELOG.md 에 날짜별로 남긴다
+
+이 스킬은 여러 Claude 세션이 돌아가며 고친다. **코드를 바꿨으면 `CHANGELOG.md` 맨 위에
+항목을 추가하고 커밋해라** (날짜 / 담당 모델명 / 무엇·왜·검증). 형식은 그 파일 머리말에 있다.
+기존 항목은 고치지 않는다. 바꾸기 전에 그 파일부터 읽으면 왜 지금 모양인지 알 수 있다.
+
 ## 규칙
 - 색 하나로만 계열을 구분하지 않는다 — `ps.MARKERS` 로 마커 병행 (흑백 인쇄 대비).
 - 이 위에 `plt.style.use`/seaborn 을 덧씌우지 않는다. 격자·그림자·그라디언트 배경 금지.
