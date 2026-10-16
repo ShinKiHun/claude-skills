@@ -16,7 +16,7 @@ description: Publication-style matplotlib figures with the lab's two fixed looks
 ## 쓰는 법
 ```python
 import sys, os
-sys.path.insert(0, os.path.expanduser("~/.claude/skills/pubfig/scripts"))
+sys.path.insert(0, os.path.expanduser("~/.claude/skills/paper-figure/scripts"))
 import pubstyle as ps
 ps.use()                                    # plain.  lab 룩: ps.use(preset="lab")
 
@@ -49,7 +49,10 @@ rp.value_scatter(ax, x, dE, fig=fig, cbar_label="$\Delta$E per atom (meV)",
 rp.value_barh(ax, names, maes, fig=fig, label="Energy MAE (eV/atom)", unit="eV/atom",
               title="MLIP Benchmark — Energy", highlight={"my-model"})
 
-# 3) 제목만 따로
+# 3) 점 라벨 — 겹침 방지 (점 라벨이 있는 산점도는 annotate 대신 반드시 이걸 쓴다)
+rp.label_points(ax, x, y, names, bold={"후보"}, s=70)   # s = scatter 마커 크기
+
+# 4) 제목만 따로
 rp.metric_title(ax, "Equation of State", "$a_0$ = 4.0000 $\AA$, $B_0$ = 150.0 GPa")
 ```
 자가 점검: `python scripts/recipes.py` → `_recipes_selftest.png` (3패널 한 장)
@@ -61,6 +64,7 @@ rp.metric_title(ax, "Equation of State", "$a_0$ = 4.0000 $\AA$, $B_0$ = 150.0 GP
 기존 항목은 고치지 않는다. 바꾸기 전에 그 파일부터 읽으면 왜 지금 모양인지 알 수 있다.
 
 ## 규칙
+- 점마다 이름을 다는 산점도는 `rp.label_points` 로 — 라벨끼리·라벨-마커 겹침 금지. 직접 `annotate` 로 고정 오프셋 달지 말 것.
 - 색 하나로만 계열을 구분하지 않는다 — `ps.MARKERS` 로 마커 병행 (흑백 인쇄 대비).
 - 이 위에 `plt.style.use`/seaborn 을 덧씌우지 않는다. 격자·그림자·그라디언트 배경 금지.
 - 유니코드 첨자(₂)는 Arial 에 없다 → mathtext `$_2$` 로 쓴다.

@@ -22,6 +22,37 @@
 
 ---
 
+## 2026-10-16 (2) — 현대자동차 / Claude Opus 5.5 (1M context)
+
+**무엇** 점 라벨 겹침 방지 `label_points` 추가, SKILL.md 에 사용 규칙 명시.
+
+- `scripts/recipes.py` — `label_points(ax, x, y, labels, bold=(), s=70, fontsize=8, pad=1.5, priority=None)`: 8 방향 x 6 거리 후보 중 (기존 라벨 겹침 x10 + 마커 겹침 + 축 밖 x50 + 거리) 비용 최소 위치. 굵은(우선) 라벨 먼저, 바로 옆이 아니면 회색 연결선. 외부 패키지 없음. 자가검사 (a) 패널에 적용.
+- `SKILL.md` — 레시피 3) 추가, 규칙: 점 라벨 산점도는 `label_points` 필수.
+- 연결선 shrinkB 를 포인트 단위 마커 반지름(√s/2)으로 (처음 픽셀 값을 넣어 선이 사라졌음). 굵은 테두리 마커는 호출 측에서 s 를 키워 넘길 것.
+
+**왜** 고정 오프셋 annotate 로 근접한 점들의 라벨이 서로·마커와 겹쳐 읽을 수 없다는 지적.
+
+**검증**
+- 밀집 더미(8점 σ=0.05 + 10점) seed 1–3: 글자 영역 기준 라벨-라벨 겹침 0, 라벨-마커 겹침 0. (Annotation.get_window_extent 는 연결선까지 포함하므로 검사는 Text.get_window_extent 로)
+- `python scripts/recipes.py` 자가검사 통과
+
+---
+
+## 2026-10-16 — 현대자동차 / Claude Opus 5.5 (1M context)
+
+**무엇** `value_barh` 가 음수 값을 그릴 수 있게 했다. SKILL.md·recipes.py 의 import 경로를 실제 폴더명으로 고쳤다.
+
+- `scripts/recipes.py` — `value_barh`: x 범위를 `[min(0,v), max(0,v)]` + 14 % 여유로, 숫자 라벨은 음수면 막대 왼쪽(ha=right), 음수가 있으면 x=0 기준선. 양수만이면 기존과 동일(`xlim = (0, max*1.14)`, 오프셋 `max*0.012`).
+- `SKILL.md`, `scripts/recipes.py` docstring — `skills/pubfig/scripts` → `skills/paper-figure/scripts` (개명 후 남은 구 경로).
+
+**왜** 기준 대비 차이(ΔE vs 기준 표면)처럼 음·양이 섞인 순위 막대를 그리면 `set_xlim(0, max*1.14)` 때문에 음수 막대가 잘렸다.
+
+**검증**
+- `python scripts/recipes.py` 자가검사 통과 (양수 순위 막대 기존과 같은 범위)
+- 음수 더미 [-0.6 … 0.7] → xlim (-0.782, 0.882), 정렬·강조 정상
+
+---
+
 ## 2026-10-06 — AIzeroC / Claude Opus 5 (1M context)
 
 **무엇** `pubfig` → `paper-figure` 로 개명하고, 그림 레시피 3종을 `recipes.py` 로 분리했다.

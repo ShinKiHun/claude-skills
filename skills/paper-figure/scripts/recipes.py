@@ -15,7 +15,7 @@ pubfig 레시피 — "값으로 색칠 + 컬러바 + 제목에 지표 병기" 3�
 
 쓰는 법
     import sys, os
-    sys.path.insert(0, os.path.expanduser("~/.claude/skills/pubfig/scripts"))
+    sys.path.insert(0, os.path.expanduser("~/.claude/skills/paper-figure/scripts"))
     import pubstyle as ps, recipes as rp
     ps.use()
     fig, ax = plt.subplots(figsize=(5, 4))
@@ -85,8 +85,11 @@ def value_barh(ax, names, values, fig=None, label="", unit="", title=None, cmap=
     ax.barh(y, values, color=cm(norm(values)), height=height,
             edgecolor=["k" if p else "none" for p in hi],
             linewidth=[1.6 if p else 0 for p in hi], zorder=3)
+    lo, hi_v = min(0.0, values.min()), max(0.0, values.max())   # 음수 막대 지원 (양수만이면 기존과 동일)
+    span = (hi_v - lo) or 1.0
     for yi, vi in zip(y, values):
-        ax.text(vi + values.max() * 0.012, yi, fmt % vi, va="center", fontsize=fontsize - 0.5)
+        ax.text(vi + (span if vi >= 0 else -span) * 0.012, yi, fmt % vi, va="center",
+                ha="left" if vi >= 0 else "right", fontsize=fontsize - 0.5)
     ax.set_yticks(y)
     ax.set_yticklabels(names, fontsize=fontsize)
     # fontweight 는 리스트를 못 받는다 -> 라벨별로 따로
@@ -94,7 +97,9 @@ def value_barh(ax, names, values, fig=None, label="", unit="", title=None, cmap=
         if p:
             t.set_fontweight("bold")
     ax.invert_yaxis()
-    ax.set_xlim(0, values.max() * 1.14)
+    ax.set_xlim(lo - (0.14 * span if lo < 0 else 0), hi_v + (0.14 * span if hi_v > 0 else 0))
+    if lo < 0:
+        ax.axvline(0, color="k", linewidth=0.8, zorder=4)
     ax.set_xlabel(label)
     if cbar:
         sm = plt.cm.ScalarMappable(cmap=cm, norm=norm)
@@ -151,6 +156,63 @@ def parity(ax, ref, pred, c=None, fig=None, cbar_label="Number of atoms",
     return sc, cb, mae, rmse
 
 
+def label_points(ax, x, y, labels, bold=(), s=70, fontsize=8, pad=1.5, priority=None):
+    """점 라벨을 서로/마커와 겹치지 않게 배치 (외부 패키지 없음, 탐욕 배치).
+
+    후보 위치 = 8 방향 x 6 거리. 이미 놓인 라벨 상자 + 모든 마커 상자 + 축 밖과의 겹침이
+    최소인 곳을 고르고, 바로 옆(1단계)이 아니면 회색 연결선을 긋는다.
+    s        : 마커 크기 (scatter 의 s, pt^2) — 마커 상자 크기 계산용
+    bold     : 굵게 쓸 라벨 집합 (후보군 강조)
+    priority : 먼저 자리를 잡을 라벨 집합 (기본 = bold)
+    반환     : Text 객체 리스트
+    """
+    fig = ax.figure
+    fig.canvas.draw()
+    rend = fig.canvas.get_renderer()
+    x = np.asarray(x, float); y = np.asarray(y, float)
+    pix = ax.transData.transform(np.c_[x, y])
+    r = np.sqrt(s) / 2 * fig.dpi / 72.0                       # marker radius in pixels
+    marks = [(px - r, py - r, px + r, py + r) for px, py in pix]
+    axb = ax.get_window_extent(rend)
+    placed, texts = [], []
+
+    def overlap(a, b):
+        w = min(a[2], b[2]) - max(a[0], b[0]); h = min(a[3], b[3]) - max(a[1], b[1])
+        return w * h if (w > 0 and h > 0) else 0.0
+
+    pri = set(bold if priority is None else priority)
+    order = sorted(range(len(labels)), key=lambda i: (labels[i] not in pri, -pix[i][1]))
+    dirs = [(1, 0, "left", "center"), (1, 1, "left", "bottom"), (0, 1, "center", "bottom"),
+            (-1, 1, "right", "bottom"), (-1, 0, "right", "center"), (-1, -1, "right", "top"),
+            (0, -1, "center", "top"), (1, -1, "left", "top")]
+    for i in order:
+        best = None
+        for k, dist in enumerate((0.9, 1.6, 2.6, 3.8, 5.2, 7.0)):
+            for dx, dy, ha, va in dirs:
+                off = (dx * (r + pad) * dist, dy * (r + pad) * dist)
+                t = ax.text(pix[i][0] + off[0], pix[i][1] + off[1], labels[i], transform=None,
+                            fontsize=fontsize, ha=ha, va=va,
+                            fontweight="bold" if labels[i] in bold else "normal")
+                bb = t.get_window_extent(rend)
+                box = (bb.x0 - pad, bb.y0 - pad, bb.x1 + pad, bb.y1 + pad)
+                t.remove()
+                cost = sum(overlap(box, b) for b in placed) * 10
+                cost += sum(overlap(box, m) for j, m in enumerate(marks) if j != i)
+                out = max(0, axb.x0 - box[0]) + max(0, box[2] - axb.x1) + max(0, axb.y0 - box[1]) + max(0, box[3] - axb.y1)
+                cost += out * 50 + k * 4 + (0.5 if dy != 0 and dx == 0 else 0)
+                if best is None or cost < best[0]:
+                    best = (cost, off, ha, va, box, k)
+        cost, off, ha, va, box, k = best
+        xy_text = ax.transData.inverted().transform((pix[i][0] + off[0], pix[i][1] + off[1]))
+        t = ax.annotate(labels[i], (x[i], y[i]), xytext=xy_text, textcoords="data", fontsize=fontsize,
+                        ha=ha, va=va, fontweight="bold" if labels[i] in bold else "normal", zorder=6,
+                        arrowprops=(dict(arrowstyle="-", color="0.25", lw=0.8, shrinkA=0, shrinkB=np.sqrt(s) / 2)
+                                    if k >= 1 else None))
+        placed.append(box)
+        texts.append(t)
+    return texts
+
+
 if __name__ == "__main__":
     import os
     import sys
@@ -169,6 +231,7 @@ if __name__ == "__main__":
     metric_title(axs[0], "Equation of State", "$a_0$ = 4.0000 $\\AA$, $B_0$ = 150.0 GPa")
     axs[0].set_xlabel("Volume ($\\AA^3$)"); axs[0].set_ylabel("Total energy (eV)")
     ps.panel(axs[0], "a", dx=-0.16, dy=1.10)
+    label_points(axs[0], V, E, ["V%d" % i for i in range(len(V))], s=110, bold={"V4"})
 
     # (b) 수렴 꼴
     x = np.arange(6)
